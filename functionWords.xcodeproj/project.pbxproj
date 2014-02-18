@@ -21,6 +21,12 @@
 		7E9416EA189894F900244CCE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9416CC189894F900244CCE /* UIKit.framework */; };
 		7E9416F2189894F900244CCE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E9416F0189894F900244CCE /* InfoPlist.strings */; };
 		7E9416F4189894F900244CCE /* functionWordsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9416F3189894F900244CCE /* functionWordsTests.m */; };
+		7EE3109E18A9E9A700DEE37F /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EE3109A18A9E9A700DEE37F /* AcousticModelEnglish.bundle */; };
+		7EE3109F18A9E9A700DEE37F /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EE3109B18A9E9A700DEE37F /* AcousticModelSpanish.bundle */; };
+		7EE310A018A9E9A700DEE37F /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE3109C18A9E9A700DEE37F /* OpenEars.framework */; };
+		7EE310A118A9E9A700DEE37F /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE3109D18A9E9A700DEE37F /* Slt.framework */; };
+		7EE310A418A9EA0800DEE37F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE310A218A9EA0800DEE37F /* AudioToolbox.framework */; };
+		7EE310A518A9EA0800DEE37F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE310A318A9EA0800DEE37F /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +59,12 @@
 		7E9416EF189894F900244CCE /* functionWordsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "functionWordsTests-Info.plist"; sourceTree = "<group>"; };
 		7E9416F1189894F900244CCE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E9416F3189894F900244CCE /* functionWordsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = functionWordsTests.m; sourceTree = "<group>"; };
+		7EE3109A18A9E9A700DEE37F /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
+		7EE3109B18A9E9A700DEE37F /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
+		7EE3109C18A9E9A700DEE37F /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
+		7EE3109D18A9E9A700DEE37F /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
+		7EE310A218A9EA0800DEE37F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7EE310A318A9EA0800DEE37F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +72,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EE310A418A9EA0800DEE37F /* AudioToolbox.framework in Frameworks */,
+				7EE310A518A9EA0800DEE37F /* AVFoundation.framework in Frameworks */,
+				7EE310A118A9E9A700DEE37F /* Slt.framework in Frameworks */,
 				7E9416CB189894F900244CCE /* CoreGraphics.framework in Frameworks */,
 				7E9416CD189894F900244CCE /* UIKit.framework in Frameworks */,
 				7E9416C9189894F900244CCE /* Foundation.framework in Frameworks */,
+				7EE310A018A9E9A700DEE37F /* OpenEars.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +98,7 @@
 		7E9416BC189894F900244CCE = {
 			isa = PBXGroup;
 			children = (
+				7EE3109918A9E9A700DEE37F /* Framework */,
 				7E9416CE189894F900244CCE /* functionWords */,
 				7E9416ED189894F900244CCE /* functionWordsTests */,
 				7E9416C7189894F900244CCE /* Frameworks */,
@@ -101,6 +118,8 @@
 		7E9416C7189894F900244CCE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7EE310A218A9EA0800DEE37F /* AudioToolbox.framework */,
+				7EE310A318A9EA0800DEE37F /* AVFoundation.framework */,
 				7E9416C8189894F900244CCE /* Foundation.framework */,
 				7E9416CA189894F900244CCE /* CoreGraphics.framework */,
 				7E9416CC189894F900244CCE /* UIKit.framework */,
@@ -150,6 +169,17 @@
 				7E9416F0189894F900244CCE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EE3109918A9E9A700DEE37F /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				7EE3109A18A9E9A700DEE37F /* AcousticModelEnglish.bundle */,
+				7EE3109B18A9E9A700DEE37F /* AcousticModelSpanish.bundle */,
+				7EE3109C18A9E9A700DEE37F /* OpenEars.framework */,
+				7EE3109D18A9E9A700DEE37F /* Slt.framework */,
+			);
+			path = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +259,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9416E1189894F900244CCE /* Images.xcassets in Resources */,
+				7EE3109F18A9E9A700DEE37F /* AcousticModelSpanish.bundle in Resources */,
+				7EE3109E18A9E9A700DEE37F /* AcousticModelEnglish.bundle in Resources */,
 				7E9416D3189894F900244CCE /* InfoPlist.strings in Resources */,
 				7E9416DC189894F900244CCE /* Main.storyboard in Resources */,
 			);
@@ -378,6 +410,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/mcortese_/Code/functionWords/Framework,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "functionWords/functionWords-Prefix.pch";
 				INFOPLIST_FILE = "functionWords/functionWords-Info.plist";
@@ -391,6 +427,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/mcortese_/Code/functionWords/Framework,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "functionWords/functionWords-Prefix.pch";
 				INFOPLIST_FILE = "functionWords/functionWords-Info.plist";
@@ -460,6 +500,7 @@
 				7E9416F9189894F900244CCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7E9416FA189894F900244CCE /* Build configuration list for PBXNativeTarget "functionWordsTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +509,7 @@
 				7E9416FC189894F900244CCE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
