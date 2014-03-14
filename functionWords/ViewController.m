@@ -16,11 +16,11 @@
 @implementation ViewController
 
 @synthesize pocketsphinxController;
-@synthesize startButton;
-@synthesize stopButton;
+@synthesize refreshButton;
 @synthesize fliteController;
 @synthesize statusTextView;
 @synthesize heardTextView;
+@synthesize outputDisplayBox;
 @synthesize pocketsphinxDbLabel;
 @synthesize fliteDbLabel;
 @synthesize openEarsEventsObserver;
@@ -30,6 +30,8 @@
 NSDictionary *languageGeneratorResults = nil;
 NSString *lmPath = nil;
 NSString *dicPath = nil;
+NSString *powerRead = nil;
+NSString *truthRead = nil;
 
 // word counting assets
 float overSixLetters;
@@ -60,9 +62,13 @@ float semanticTimePercent;
 float totalWordsPercent;
 
 // output assets
-char happy;
-char sad;
-char angry;
+int happy;
+int sad;
+int angry;
+int disHonesty;
+int honesty;
+int lackConfidence;
+int confidence;
 bool power;
 bool truth;
 
@@ -126,294 +132,294 @@ bool truth;
     LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
     
     NSArray *languageArray = [NSArray arrayWithObjects:   @"A",
-                              @"ACCEPTED",
-                              @"ADMITTED",
-                              @"AFFECT",
-                              @"AFFECTED",
-                              @"AFTER",
-                              @"AGAIN",
-                              @"AGO",
-                              @"ALREADY",
-                              @"ALWAYS",
-                              @"AN",
-                              @"ANNUAL",
-                              @"ANYTIME",
-                              @"APPEARED",
-                              @"APRIL",
-                              @"ASKED",
-                              @"ASSUME",
-                              @"ATE",
-                              @"AUGUST",
-                              @"AUTUMN",
-                              @"BASIS",
-                              @"BECAME",
-                              @"BECAUSE",
-                              @"BEEN",
-                              @"BEFORE",
-                              @"BEGAN",
-                              @"BELIEVED",
-                              @"BOUGHT",
-                              @"BRIEF",
-                              @"BROKEN",
-                              @"BROUGHT",
-                              @"CALLED",
-                              @"CAME",
-                              @"CARED",
-                              @"CARRIED",
-                              @"CAUSE",
-                              @"CHANGED",
-                              @"CHEERED",
-                              @"CLOCK",
-                              @"CONFIDED",
-                              @"CONSEQUENCE",
-                              @"CRIED",
-                              @"DAY",
-                              @"DECADE",
-                              @"DECEMBER",
-                              @"DEPEND",
-                              @"DEPENDED",
-                              @"DESCRIBED",
-                              @"DID",
-                              @"DIED",
-                              @"DISLIKED",
-                              @"DONE",
-                              @"DRANK",
-                              @"DRIVEN",
-                              @"DROVE",
-                              @"DRUNK",
-                              @"DURING",
-                              @"EATEN",
-                              @"EFFECT",
-                              @"END",
-                              @"ENDED",
-                              @"ENTERED",
-                              @"ERA",
-                              @"ETERNITY",
-                              @"EVENING",
-                              @"EXPLAINED",
-                              @"EXPRESSED",
-                              @"FEBRUARY",
-                              @"FED",
-                              @"FELT",
-                              @"FLED",
-                              @"FLEW",
-                              @"FOLLOWED",
-                              @"FOREVER",
-                              @"FOUGHT",
-                              @"FOUND",
-                              @"FOUNDATION",
-                              @"FRIDAY",
-                              @"FUTURE",
-                              @"GAVE",
-                              @"GENERATION",
-                              @"GIVEN",
-                              @"GONE",
-                              @"GOT",
-                              @"GOTTEN",
-                              @"GUESSED",
-                              @"HAD",
-                              @"HAPPENED",
-                              @"HATED",
-                              @"HE",
-                              @"HE'LL",
-                              @"HEARD",
-                              @"HELD",
-                              @"HELPED",
-                              @"HENCE",
-                              @"HER",
-                              @"HIM",
-                              @"HIS",
-                              @"HISTORY",
-                              @"HOPED",
-                              @"HOUR",
-                              @"HOW",
-                              @"I",
-                              @"I'LL",
-                              @"IMMEDIATE",
-                              @"IMMORTAL",
-                              @"IMPLICIT",
-                              @"INFER",
-                              @"INFERRED",
-                              @"INFLUENCE",
-                              @"INSTANCE",
-                              @"IT'LL",
-                              @"JANUARY",
-                              @"JULY",
-                              @"JUNE",
-                              @"KEPT",
-                              @"KNEW",
-                              @"LAST",
-                              @"LATE",
-                              @"LEFT",
-                              @"LETS",
-                              @"LIED",
-                              @"LIKED",
-                              @"LISTENED",
-                              @"LIVED",
-                              @"LOOKED",
-                              @"LOST",
-                              @"LOVED",
-                              @"MADE",
-                              @"MARCH",
-                              @"MAY",
-                              @"ME",
-                              @"MEANT",
-                              @"MEANTIME",
-                              @"MEANWHILE",
-                              @"MET",
-                              @"MIGHT",
-                              @"MINE",
-                              @"MINUTE",
-                              @"MISSED",
-                              @"MOMENT",
-                              @"MONDAY",
-                              @"MONTH",
-                              @"MORNING",
-                              @"MOTIVATE",
-                              @"MOTIVE",
-                              @"MOVED",
-                              @"MY",
-                              @"NEEDED",
-                              @"NEVER",
-                              @"NEXT",
-                              @"NIGHT",
-                              @"NOON",
-                              @"NOVEMBER",
-                              @"NOW",
-                              @"OCCASIONAL",
-                              @"OCTOBER",
-                              @"OLD",
-                              @"ONCE",
-                              @"ORIGIN",
-                              @"OUR",
-                              @"OUTCOME",
-                              @"OWED",
-                              @"PACKED",
-                              @"PAID",
-                              @"PAST",
-                              @"PERIOD",
-                              @"PLAYED",
-                              @"PRESENT",
-                              @"PRODUCE",
-                              @"PRODUCT",
-                              @"PROTESTED",
-                              @"PURPOSE",
-                              @"QUESTIONNED",
-                              @"RAN",
-                              @"RATIONAL",
-                              @"REACT",
-                              @"REASON",
-                              @"REQUIRED",
-                              @"RESOLVED",
-                              @"RESULT",
-                              @"ROOT",
-                              @"RUBBED",
-                              @"RUSHED",
-                              @"SAID",
-                              @"SAT",
-                              @"SATURDAY",
-                              @"SAW",
-                              @"SEEMED",
-                              @"SEEN",
-                              @"SEMESTER",
-                              @"SENSED",
-                              @"SEPTEMBER",
-                              @"SHALL",
-                              @"SHARED",
-                              @"SHE",
-                              @"SHE'LL",
-                              @"SHOPPED",
-                              @"SHOWED",
-                              @"SINCE",
-                              @"SMOKED",
-                              @"SOLD",
-                              @"SOMETIME",
-                              @"SOON",
-                              @"SOURCE",
-                              @"SPENT",
-                              @"SPOKE",
-                              @"SPRING",
-                              @"STARTED",
-                              @"STAYED",
-                              @"STIMULI",
-                              @"STOOD",
-                              @"STOPPED",
-                              @"STUCK",
-                              @"STUDIED",
-                              @"STUNNED",
-                              @"SUCKED",
-                              @"SUDDEN",
-                              @"SUFFERED",
-                              @"SUMMER",
-                              @"SUNDAY",
-                              @"SUPPORTED",
-                              @"SUPPOSED",
-                              @"SURROUNDED",
-                              @"TAKEN",
-                              @"TALKED",
-                              @"TAUGHT",
-                              @"TEMPORARY",
-                              @"TENDED",
-                              @"THANKED",
-                              @"THE",
-                              @"THEIR",
-                              @"THEM",
-                              @"THEN",
-                              @"THEREFORE",
-                              @"THEY",
-                              @"THEY'LL",
-                              @"THOU",
-                              @"THOUGHT",
-                              @"THREW",
-                              @"THURSDAY",
-                              @"THUS",
-                              @"TILL",
-                              @"TIME",
-                              @"TODAY",
-                              @"TOLD",
-                              @"TOMORROW",
-                              @"TONIGHT",
-                              @"TOOK",
-                              @"TRIED",
-                              @"TUESDAY",
-                              @"TURNED",
-                              @"UNDERSTOOD",
-                              @"UNTIL",
-                              @"US",
-                              @"USED",
-                              @"VIEWED",
-                              @"WAITED",
-                              @"WALKED",
-                              @"WANTED",
-                              @"WAS",
-                              @"WE",
-                              @"WE'LL",
-                              @"WEDNESDAY",
-                              @"WEEK",
-                              @"WENT",
-                              @"WERE",
-                              @"WHEN",
-                              @"WHILE",
-                              @"WHY",
-                              @"WILL",
-                              @"WINTER",
-                              @"WISHED",
-                              @"WOKE",
-                              @"WON",
-                              @"WON'T",
-                              @"WONDERED",
-                              @"WORE",
-                              @"WORKED",
-                              @"WRITTEN",
-                              @"WROTE",
-                              @"Y'ALL",
-                              @"YA",
-                              @"YEAR",
-                              @"YESTERDAY",
-                              @"YOU",
-                              @"YOU'LL",
-                              @"YOUNG",
-                              @"YOUR", nil];
+                                                          @"ACCEPTED",
+                                                          @"ADMITTED",
+                                                          @"AFFECT",
+                                                          @"AFFECTED",
+                                                          @"AFTER",
+                                                          @"AGAIN",
+                                                          @"AGO",
+                                                          @"ALREADY",
+                                                          @"ALWAYS",
+                                                          @"AN",
+                                                          @"ANNUAL",
+                                                          @"ANYTIME",
+                                                          @"APPEARED",
+                                                          @"APRIL",
+                                                          @"ASKED",
+                                                          @"ASSUME",
+                                                          @"ATE",
+                                                          @"AUGUST",
+                                                          @"AUTUMN",
+                                                          @"BASIS",
+                                                          @"BECAME",
+                                                          @"BECAUSE",
+                                                          @"BEEN",
+                                                          @"BEFORE",
+                                                          @"BEGAN",
+                                                          @"BELIEVED",
+                                                          @"BOUGHT",
+                                                          @"BRIEF",
+                                                          @"BROKEN",
+                                                          @"BROUGHT",
+                                                          @"CALLED",
+                                                          @"CAME",
+                                                          @"CARED",
+                                                          @"CARRIED",
+                                                          @"CAUSE",
+                                                          @"CHANGED",
+                                                          @"CHEERED",
+                                                          @"CLOCK",
+                                                          @"CONFIDED",
+                                                          @"CONSEQUENCE",
+                                                          @"CRIED",
+                                                          @"DAY",
+                                                          @"DECADE",
+                                                          @"DECEMBER",
+                                                          @"DEPEND",
+                                                          @"DEPENDED",
+                                                          @"DESCRIBED",
+                                                          @"DID",
+                                                          @"DIED",
+                                                          @"DISLIKED",
+                                                          @"DONE",
+                                                          @"DRANK",
+                                                          @"DRIVEN",
+                                                          @"DROVE",
+                                                          @"DRUNK",
+                                                          @"DURING",
+                                                          @"EATEN",
+                                                          @"EFFECT",
+                                                          @"END",
+                                                          @"ENDED",
+                                                          @"ENTERED",
+                                                          @"ERA",
+                                                          @"ETERNITY",
+                                                          @"EVENING",
+                                                          @"EXPLAINED",
+                                                          @"EXPRESSED",
+                                                          @"FEBRUARY",
+                                                          @"FED",
+                                                          @"FELT",
+                                                          @"FLED",
+                                                          @"FLEW",
+                                                          @"FOLLOWED",
+                                                          @"FOREVER",
+                                                          @"FOUGHT",
+                                                          @"FOUND",
+                                                          @"FOUNDATION",
+                                                          @"FRIDAY",
+                                                          @"FUTURE",
+                                                          @"GAVE",
+                                                          @"GENERATION",
+                                                          @"GIVEN",
+                                                          @"GONE",
+                                                          @"GOT",
+                                                          @"GOTTEN",
+                                                          @"GUESSED",
+                                                          @"HAD",
+                                                          @"HAPPENED",
+                                                          @"HATED",
+                                                          @"HE",
+                                                          @"HE'LL",
+                                                          @"HEARD",
+                                                          @"HELD",
+                                                          @"HELPED",
+                                                          @"HENCE",
+                                                          @"HER",
+                                                          @"HIM",
+                                                          @"HIS",
+                                                          @"HISTORY",
+                                                          @"HOPED",
+                                                          @"HOUR",
+                                                          @"HOW",
+                                                          @"I",
+                                                          @"I'LL",
+                                                          @"IMMEDIATE",
+                                                          @"IMMORTAL",
+                                                          @"IMPLICIT",
+                                                          @"INFER",
+                                                          @"INFERRED",
+                                                          @"INFLUENCE",
+                                                          @"INSTANCE",
+                                                          @"IT'LL",
+                                                          @"JANUARY",
+                                                          @"JULY",
+                                                          @"JUNE",
+                                                          @"KEPT",
+                                                          @"KNEW",
+                                                          @"LAST",
+                                                          @"LATE",
+                                                          @"LEFT",
+                                                          @"LETS",
+                                                          @"LIED",
+                                                          @"LIKED",
+                                                          @"LISTENED",
+                                                          @"LIVED",
+                                                          @"LOOKED",
+                                                          @"LOST",
+                                                          @"LOVED",
+                                                          @"MADE",
+                                                          @"MARCH",
+                                                          @"MAY",
+                                                          @"ME",
+                                                          @"MEANT",
+                                                          @"MEANTIME",
+                                                          @"MEANWHILE",
+                                                          @"MET",
+                                                          @"MIGHT",
+                                                          @"MINE",
+                                                          @"MINUTE",
+                                                          @"MISSED",
+                                                          @"MOMENT",
+                                                          @"MONDAY",
+                                                          @"MONTH",
+                                                          @"MORNING",
+                                                          @"MOTIVATE",
+                                                          @"MOTIVE",
+                                                          @"MOVED",
+                                                          @"MY",
+                                                          @"NEEDED",
+                                                          @"NEVER",
+                                                          @"NEXT",
+                                                          @"NIGHT",
+                                                          @"NOON",
+                                                          @"NOVEMBER",
+                                                          @"NOW",
+                                                          @"OCCASIONAL",
+                                                          @"OCTOBER",
+                                                          @"OLD",
+                                                          @"ONCE",
+                                                          @"ORIGIN",
+                                                          @"OUR",
+                                                          @"OUTCOME",
+                                                          @"OWED",
+                                                          @"PACKED",
+                                                          @"PAID",
+                                                          @"PAST",
+                                                          @"PERIOD",
+                                                          @"PLAYED",
+                                                          @"PRESENT",
+                                                          @"PRODUCE",
+                                                          @"PRODUCT",
+                                                          @"PROTESTED",
+                                                          @"PURPOSE",
+                                                          @"QUESTIONNED",
+                                                          @"RAN",
+                                                          @"RATIONAL",
+                                                          @"REACT",
+                                                          @"REASON",
+                                                          @"REQUIRED",
+                                                          @"RESOLVED",
+                                                          @"RESULT",
+                                                          @"ROOT",
+                                                          @"RUBBED",
+                                                          @"RUSHED",
+                                                          @"SAID",
+                                                          @"SAT",
+                                                          @"SATURDAY",
+                                                          @"SAW",
+                                                          @"SEEMED",
+                                                          @"SEEN",
+                                                          @"SEMESTER",
+                                                          @"SENSED",
+                                                          @"SEPTEMBER",
+                                                          @"SHALL",
+                                                          @"SHARED",
+                                                          @"SHE",
+                                                          @"SHE'LL",
+                                                          @"SHOPPED",
+                                                          @"SHOWED",
+                                                          @"SINCE",
+                                                          @"SMOKED",
+                                                          @"SOLD",
+                                                          @"SOMETIME",
+                                                          @"SOON",
+                                                          @"SOURCE",
+                                                          @"SPENT",
+                                                          @"SPOKE",
+                                                          @"SPRING",
+                                                          @"STARTED",
+                                                          @"STAYED",
+                                                          @"STIMULI",
+                                                          @"STOOD",
+                                                          @"STOPPED",
+                                                          @"STUCK",
+                                                          @"STUDIED",
+                                                          @"STUNNED",
+                                                          @"SUCKED",
+                                                          @"SUDDEN",
+                                                          @"SUFFERED",
+                                                          @"SUMMER",
+                                                          @"SUNDAY",
+                                                          @"SUPPORTED",
+                                                          @"SUPPOSED",
+                                                          @"SURROUNDED",
+                                                          @"TAKEN",
+                                                          @"TALKED",
+                                                          @"TAUGHT",
+                                                          @"TEMPORARY",
+                                                          @"TENDED",
+                                                          @"THANKED",
+                                                          @"THE",
+                                                          @"THEIR",
+                                                          @"THEM",
+                                                          @"THEN",
+                                                          @"THEREFORE",
+                                                          @"THEY",
+                                                          @"THEY'LL",
+                                                          @"THOU",
+                                                          @"THOUGHT",
+                                                          @"THREW",
+                                                          @"THURSDAY",
+                                                          @"THUS",
+                                                          @"TILL",
+                                                          @"TIME",
+                                                          @"TODAY",
+                                                          @"TOLD",
+                                                          @"TOMORROW",
+                                                          @"TONIGHT",
+                                                          @"TOOK",
+                                                          @"TRIED",
+                                                          @"TUESDAY",
+                                                          @"TURNED",
+                                                          @"UNDERSTOOD",
+                                                          @"UNTIL",
+                                                          @"US",
+                                                          @"USED",
+                                                          @"VIEWED",
+                                                          @"WAITED",
+                                                          @"WALKED",
+                                                          @"WANTED",
+                                                          @"WAS",
+                                                          @"WE",
+                                                          @"WE'LL",
+                                                          @"WEDNESDAY",
+                                                          @"WEEK",
+                                                          @"WENT",
+                                                          @"WERE",
+                                                          @"WHEN",
+                                                          @"WHILE",
+                                                          @"WHY",
+                                                          @"WILL",
+                                                          @"WINTER",
+                                                          @"WISHED",
+                                                          @"WOKE",
+                                                          @"WON",
+                                                          @"WON'T",
+                                                          @"WONDERED",
+                                                          @"WORE",
+                                                          @"WORKED",
+                                                          @"WRITTEN",
+                                                          @"WROTE",
+                                                          @"Y'ALL",
+                                                          @"YA",
+                                                          @"YEAR",
+                                                          @"YESTERDAY",
+                                                          @"YOU",
+                                                          @"YOU'LL",
+                                                          @"YOUNG",
+                                                          @"YOUR", nil];
     
     NSString *functionDict = @"FunctionDictionary";
     NSError *error = [lmGenerator generateLanguageModelFromArray:languageArray withFilesNamed:functionDict forAcousticModelAtPath:[AcousticModel pathToModel:@"AcousticModelEnglish"]];
@@ -432,17 +438,14 @@ bool truth;
         [self startListening];
     }
     
-    // ui shizz
-	self.startButton.hidden = TRUE;
-	self.stopButton.hidden = TRUE;
+    // initial ui shizz
 }
 
 #pragma mark -
 #pragma mark OpenEarsEventsObserver delegate methods
 
 // deliver text of speech heard and analyzed + accuracy score + utterance ID
-// word counts will occur here
-// percentages calculated
+// word counts occur, percentages calculated, outcomes drawn
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     
     // if user says a category word, add to that category
@@ -478,24 +481,127 @@ bool truth;
     totalWords = overSixLetters + firstPersonSingular + firstPersonPlural + totalFirstPerson + secondPerson + thirdPerson + articles + semanticCausation + pastTenseVerbs + futureTenseVerbs + semanticTime;
     
     // calculate percentages
-    overSixLettersPercent = overSixLetters/totalWords;
-    firstPersonSingularPercent = firstPersonSingular/totalWords;
-    firstPersonPluralPercent = firstPersonPlural/totalWords;
-    totalFirstPersonPercent = totalFirstPerson/totalWords;
-    secondPersonPercent = secondPerson/totalWords;
-    thirdPersonPercent = thirdPerson/totalWords;
-    articlesPercent = articles/totalWords;
-    semanticCausationPercent = semanticCausation/totalWords;
-    pastTenseVerbsPercent = pastTenseVerbs/totalWords;
-    futureTenseVerbsPercent = futureTenseVerbs/totalWords;
-    semanticTimePercent = semanticTime/totalWords;
+    overSixLettersPercent = (overSixLetters/totalWords)*100;
+    firstPersonSingularPercent = (firstPersonSingular/totalWords)*100;
+    firstPersonPluralPercent = (firstPersonPlural/totalWords)*100;
+    totalFirstPersonPercent = (totalFirstPerson/totalWords)*100;
+    secondPersonPercent = (secondPerson/totalWords)*100;
+    thirdPersonPercent = (thirdPerson/totalWords)*100;
+    articlesPercent = (articles/totalWords)*100;
+    semanticCausationPercent = (semanticCausation/totalWords)*100;
+    pastTenseVerbsPercent = (pastTenseVerbs/totalWords)*100;
+    futureTenseVerbsPercent = (futureTenseVerbs/totalWords)*100;
+    semanticTimePercent = (semanticTime/totalWords)*100;
+    
+    // outputs
+    // happy
+    if (pastTenseVerbsPercent < 11 && happy < 250){
+        happy = happy+5;
+    } else if (pastTenseVerbsPercent > 11 && happy > 4){
+        happy = happy-5;
+    }
+    if (futureTenseVerbsPercent < 2 && happy < 250){
+        happy = happy+5;
+    } else if (futureTenseVerbsPercent > 2 && happy > 4){
+        happy = happy-5;
+    }
+    if (firstPersonPluralPercent > 2 && happy < 250){
+        happy = happy+5;
+    } else if (firstPersonPluralPercent < 2 && happy > 4){
+        happy = happy-5;
+    }
+    if (semanticTimePercent > 9 && happy < 250){
+        happy = happy+5;
+    } else if (semanticTimePercent < 9 && happy > 4){
+        happy = happy-5;
+    }
+    // sad
+    if (firstPersonSingularPercent > 16 && sad < 250){
+        sad = sad+5;
+    } else if (firstPersonSingularPercent < 16 && sad > 4){
+        sad = sad-5;
+    }
+    if (pastTenseVerbsPercent > 11 && sad < 250){
+        sad = sad+5;
+    } else if (pastTenseVerbsPercent < 11 && sad > 4){
+        sad = sad-5;
+    }
+    if (futureTenseVerbsPercent > 2 && sad < 250){
+        sad = sad+5;
+    } else if (futureTenseVerbsPercent < 2 && sad > 4){
+        sad = sad-5;
+    }
+    if (semanticCausationPercent > 1 && sad < 250){
+        sad = sad+5;
+    } else if (semanticCausationPercent < 1 && sad > 4){
+        sad = sad-5;
+    }
+    // angry
+    if (secondPersonPercent > 1 && angry < 250){
+        angry = angry+5;
+    } else if (secondPersonPercent < 1 && angry > 4){
+        angry = angry-5;
+    }
+    if (thirdPersonPercent > 5 && angry < 250){
+        angry = angry+5;
+    } else if (thirdPersonPercent < 5 && angry > 4){
+        angry = angry-5;
+    }
+    if (pastTenseVerbsPercent < 11 && angry < 250){
+        angry = angry+5;
+    } else if (pastTenseVerbsPercent > 11 && angry > 4){
+        angry = angry-5;
+    }
+    if (semanticCausationPercent > 1 && angry < 250){
+        angry = angry+5;
+    } else if (semanticCausationPercent < 1 && angry > 4){
+        angry = angry-5;
+    }
+    // confidence
+    if (firstPersonPluralPercent > 2){confidence++;}
+    if (overSixLettersPercent > 25){confidence++;}
+    if (articlesPercent > 11){confidence++;}
+    // lack of confidence
+    if (firstPersonSingularPercent > 16){lackConfidence++;}
+    if (pastTenseVerbsPercent < 11){lackConfidence++;}
+    if (futureTenseVerbsPercent < 2){lackConfidence++;}
+    // confidence bool
+    if (confidence > lackConfidence){
+        power = true;
+        powerRead = @"Confident";
+    } else if (honesty < disHonesty) {
+        truth = false;
+        powerRead = @"Under Confident";
+    } else {
+        powerRead = @"Average";
+    }
+    // honesty
+    if (overSixLettersPercent > 25){honesty++;}
+    if (totalFirstPersonPercent > 17){honesty++;}
+    if (semanticTimePercent > 9){honesty++;}
+    // dishonesty
+    if (pastTenseVerbsPercent > 11){disHonesty++;}
+    if (totalFirstPersonPercent < 17){disHonesty++;}
+    if (semanticTimePercent < 9){disHonesty++;}
+    // honesty bool
+    if (honesty > disHonesty){
+        truth = true;
+        truthRead = @"Honest";
+    } else if (honesty < disHonesty) {
+        truth = false;
+        truthRead = @"Dishonest";
+    } else {
+        truthRead = @"Average";
+    }
     
     // print all
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
     NSLog(@"\n Words Over Six Characters = %f percent \n First Person Singular Pronouns = %f percent \n First Person Plural Pronouns = %f percent \n Total First Person Pronouns = %f percent \n Second Person Pronouns = %f percent \n Third Person Pronouns = %f percent \n Articles = %f percent \n Causation Words = %f percent \n Past Tense Verbs = %f percent \n Future Tense Verbs = %f percent \n Time Words = %f percent \n Sample Size = %f words", overSixLettersPercent, firstPersonSingularPercent, firstPersonPluralPercent, totalFirstPersonPercent, secondPersonPercent, thirdPersonPercent, articlesPercent, semanticCausationPercent, pastTenseVerbsPercent, futureTenseVerbsPercent, semanticTimePercent, totalWords);
+    NSLog(@"\n Happiness Score = %d /240 \n Sadness Score = %d /240 \n Anger Score = %d /240 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead);
     
-    // display words
-	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // display in app
+    // display words and scores in app
+	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"Happiness Score = %d /240 \n Sadness Score = %d /240 \n Anger Score = %d /240 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead]; // score
 }
 
 #ifdef kGetNbest
@@ -604,18 +710,41 @@ bool truth;
 
 // UI shizz
 
-- (IBAction) stopButtonAction { // stop button
-	[self.pocketsphinxController stopListening];
-    //[self.pocketsphinxController suspendRecognition];
-	self.startButton.hidden = FALSE;
-	self.stopButton.hidden = TRUE;
+- (IBAction) displayOutputs { // visuals
+    //NSGradient(angry,happy,sad);
 }
 
-- (IBAction) startButtonAction { // start button
-    [self startListening];
-	self.startButton.hidden = TRUE;
-	self.stopButton.hidden = FALSE;
+- (IBAction) refreshButtonAction { // refresh
+    //[self startListening];
+    //[self.pocketsphinxController stopListening];
+    // if (refreshButton = pressed) { }
+    overSixLetters=0;
+    firstPersonSingular=0;
+    firstPersonPlural=0;
+    totalFirstPerson=0;
+    secondPerson=0;
+    thirdPerson=0;
+    articles=0;
+    semanticCausation=0;
+    pastTenseVerbs=0;
+    futureTenseVerbs=0;
+    semanticTime=0;
+    totalWords=0;
+    happy=0;
+    sad=0;
+    angry=0;
+    disHonesty=0;
+    honesty=0;
+    lackConfidence=0;
+    confidence=0;
+	//self.refreshButton.hidden = FALSE;
 }
+
+/*
+ 
+ ui sketch zone
+ 
+ */
 
 #pragma mark -
 #pragma mark Example for reading out Pocketsphinx and Flite audio levels without locking the UI by using an NSTimer

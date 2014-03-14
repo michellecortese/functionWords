@@ -20,18 +20,17 @@
 	PocketsphinxController *pocketsphinxController; // voice recognition controller
 	FliteController *fliteController; // tts controller
 
-    IBOutlet UIButton *stopButton;
-    IBOutlet UIButton *startButton;
-    IBOutlet UITextView *statusTextView;
-    IBOutlet UITextView *heardTextView;
+    IBOutlet UIButton *refreshButton;
+    IBOutlet UILabel *statusTextView;
+    IBOutlet UILabel *heardTextView;
 	IBOutlet UILabel *pocketsphinxDbLabel;
 	IBOutlet UILabel *fliteDbLabel;
-    
+    IBOutlet UILabel *outputDisplayBox;
 }
 
 // ui
-- (IBAction) stopButtonAction;
-- (IBAction) startButtonAction;
+- (IBAction) displayOutputs;
+- (IBAction) refreshButtonAction;
 
 @property (nonatomic, strong) Slt *slt;
 @property (nonatomic, strong) OpenEarsEventsObserver *openEarsEventsObserver;
@@ -39,12 +38,12 @@
 @property (nonatomic, strong) FliteController *fliteController;
 
 // ui
-@property (nonatomic, strong) IBOutlet UIButton *stopButton;
-@property (nonatomic, strong) IBOutlet UIButton *startButton;
-@property (nonatomic, strong) IBOutlet UITextView *statusTextView;
-@property (nonatomic, strong) IBOutlet UITextView *heardTextView;
+@property (nonatomic, strong) IBOutlet UIButton *refreshButton;
+@property (nonatomic, strong) IBOutlet UILabel *statusTextView;
+@property (nonatomic, strong) IBOutlet UILabel *heardTextView;
 @property (nonatomic, strong) IBOutlet UILabel *pocketsphinxDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *fliteDbLabel;
+@property (nonatomic, strong) IBOutlet UILabel *outputDisplayBox;
 
 @end
 
