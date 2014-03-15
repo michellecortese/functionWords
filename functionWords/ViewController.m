@@ -32,6 +32,7 @@ NSString *lmPath = nil;
 NSString *dicPath = nil;
 NSString *powerRead = nil;
 NSString *truthRead = nil;
+NSArray *splitHypotheses = nil;
 
 // word counting assets
 float overSixLetters;
@@ -449,33 +450,70 @@ bool truth;
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     
     // if user says a category word, add to that category
-    if([hypothesis isEqualToString:@"I"] || [hypothesis isEqualToString:@"ME"] || [hypothesis isEqualToString:@"MINE"] || [hypothesis isEqualToString:@"MY"]) {
-        firstPersonSingular++;
+    NSArray *firstPersonSingularArray = [NSArray arrayWithObjects: @"I", @"ME", @"MINE", @"MY", nil];
+    for (NSString *s in firstPersonSingularArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            firstPersonSingular++;
+        }
     }
-    if([hypothesis isEqualToString:@"LETS"] || [hypothesis isEqualToString:@"OUR"] || [hypothesis isEqualToString:@"US"] || [hypothesis isEqualToString:@"WE"]) {
-        firstPersonPlural++;
+    NSArray *firstPersonPluralArray = [NSArray arrayWithObjects: @"LETS", @"OUR", @"US", @"WE", nil];
+    for (NSString *s in firstPersonPluralArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            firstPersonPlural++;
+        }
     }
-    if([hypothesis isEqualToString:@"THOU"] || [hypothesis isEqualToString:@"Y'ALL"] || [hypothesis isEqualToString:@"YA"] || [hypothesis isEqualToString:@"YOU"] || [hypothesis isEqualToString:@"YOUR"]) {
-        secondPerson++;
+    NSArray *secondPersonArray = [NSArray arrayWithObjects: @"THOU", @"Y'ALL", @"YA", @"YOU", @"YOUR", nil];
+    for (NSString *s in secondPersonArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            secondPerson++;
+        }
     }
-    if([hypothesis isEqualToString:@"HE"] || [hypothesis isEqualToString:@"HER"] || [hypothesis isEqualToString:@"HIM"] || [hypothesis isEqualToString:@"HIS"] || [hypothesis isEqualToString:@"SHE"] || [hypothesis isEqualToString:@"THEIR"] || [hypothesis isEqualToString:@"THEM"] || [hypothesis isEqualToString:@"THEY"]) {
-        thirdPerson++;
+    NSArray *thirdPersonArray = [NSArray arrayWithObjects: @"HE", @"HER", @"HIM", @"HIS", @"SHE", @"THEIR", @"THEM", @"THEY", nil];
+    for (NSString *s in thirdPersonArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            thirdPerson++;
+        }
     }
-    if([hypothesis isEqualToString:@"A"] || [hypothesis isEqualToString:@"AN"] || [hypothesis isEqualToString:@"THE"]) {
-        articles++;
+    NSArray *articlesArray = [NSArray arrayWithObjects: @"A", @"AN", @"THE", nil];
+    for (NSString *s in articlesArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            articles++;
+        }
     }
-    if([hypothesis isEqualToString:@"AFFECT"] || [hypothesis isEqualToString:@"ASSUME"] || [hypothesis isEqualToString:@"BASIS"] || [hypothesis isEqualToString:@"BECAUSE"] || [hypothesis isEqualToString:@"CAUSE"] || [hypothesis isEqualToString:@"CONSEQUENCE"] || [hypothesis isEqualToString:@"DEPEND"] || [hypothesis isEqualToString:@"EFFECT"] || [hypothesis isEqualToString:@"FOUND"] || [hypothesis isEqualToString:@"FOUNDATION"] || [hypothesis isEqualToString:@"HENCE"] || [hypothesis isEqualToString:@"HOW"] || [hypothesis isEqualToString:@"IMPLICIT"] || [hypothesis isEqualToString:@"INFER"] || [hypothesis isEqualToString:@"INFLUENCE"] || [hypothesis isEqualToString:@"MOTIVATE"] || [hypothesis isEqualToString:@"MOTIVE"] || [hypothesis isEqualToString:@"ORIGIN"] || [hypothesis isEqualToString:@"OUTCOME"] || [hypothesis isEqualToString:@"PRODUCE"] || [hypothesis isEqualToString:@"PRODUCT"] || [hypothesis isEqualToString:@"PURPOSE"] || [hypothesis isEqualToString:@"RATIONAL"] || [hypothesis isEqualToString:@"REACT"] || [hypothesis isEqualToString:@"REASON"] || [hypothesis isEqualToString:@"RESULT"] || [hypothesis isEqualToString:@"ROOT"] || [hypothesis isEqualToString:@"SINCE"] || [hypothesis isEqualToString:@"SOURCE"] || [hypothesis isEqualToString:@"STIMULI"] || [hypothesis isEqualToString:@"THEREFORE"] || [hypothesis isEqualToString:@"THUS"] || [hypothesis isEqualToString:@"WHY"]) {
-        semanticCausation++;
+    NSArray *semanticCausationArray = [NSArray arrayWithObjects: @"AFFECT", @"ASSUME", @"BASIS", @"BECAUSE", @"CAUSE", @"CONSEQUENCE", @"DEPEND", @"EFFECT", @"FOUND", @"FOUNDATION", @"HENCE", @"HOW", @"IMPLICIT", @"INFER", @"INFLUENCE", @"MOTIVATE", @"MOTIVE", @"ORIGIN", @"OUTCOME", @"PRODUCE", @"PRODUCT", @"PURPOSE", @"RATIONAL", @"REACT", @"REASON", @"RESULT", @"ROOT", @"SINCE", @"SOURCE", @"STIMULI", @"THEREFORE", @"THUS", @"WHY", nil];
+    for (NSString *s in semanticCausationArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            semanticCausation++;
+        }
     }
-    if([hypothesis isEqualToString:@"AFTER"] || [hypothesis isEqualToString:@"AGAIN"] || [hypothesis isEqualToString:@"AGO"] || [hypothesis isEqualToString:@"ALREADY"] || [hypothesis isEqualToString:@"ALWAYS"] || [hypothesis isEqualToString:@"ANNUAL"] || [hypothesis isEqualToString:@"ANYTIME"] || [hypothesis isEqualToString:@"APRIL"] || [hypothesis isEqualToString:@"AUGUST"] || [hypothesis isEqualToString:@"AUTUMN"] || [hypothesis isEqualToString:@"BEFORE"] || [hypothesis isEqualToString:@"BRIEF"] || [hypothesis isEqualToString:@"CLOCK"] || [hypothesis isEqualToString:@"DAY"] || [hypothesis isEqualToString:@"DECADE"] || [hypothesis isEqualToString:@"DECEMBER"] || [hypothesis isEqualToString:@"DURING"] || [hypothesis isEqualToString:@"END"] || [hypothesis isEqualToString:@"ERA"] || [hypothesis isEqualToString:@"ETERNITY"] || [hypothesis isEqualToString:@"EVENING"] || [hypothesis isEqualToString:@"FEBRUARY"] || [hypothesis isEqualToString:@"FOREVER"] || [hypothesis isEqualToString:@"FRIDAY"] || [hypothesis isEqualToString:@"FUTURE"] || [hypothesis isEqualToString:@"GENERATION"] || [hypothesis isEqualToString:@"HISTORY"] || [hypothesis isEqualToString:@"HOUR"] || [hypothesis isEqualToString:@"IMMEDIATE"] || [hypothesis isEqualToString:@"IMMORTAL"] || [hypothesis isEqualToString:@"INSTANCE"] || [hypothesis isEqualToString:@"JANUARY"] || [hypothesis isEqualToString:@"JULY"] || [hypothesis isEqualToString:@"JUNE"] || [hypothesis isEqualToString:@"LAST"] || [hypothesis isEqualToString:@"LATE"] || [hypothesis isEqualToString:@"MARCH"] || [hypothesis isEqualToString:@"MEANTIME"] || [hypothesis isEqualToString:@"MEANWHILE"] || [hypothesis isEqualToString:@"MINUTE"] || [hypothesis isEqualToString:@"MOMENT"] || [hypothesis isEqualToString:@"MONDAY"] || [hypothesis isEqualToString:@"MONTH"] || [hypothesis isEqualToString:@"MORNING"] || [hypothesis isEqualToString:@"NEVER"] || [hypothesis isEqualToString:@"NEXT"] || [hypothesis isEqualToString:@"NIGHT"] || [hypothesis isEqualToString:@"NOON"] || [hypothesis isEqualToString:@"NOVEMBER"] || [hypothesis isEqualToString:@"NOW"] || [hypothesis isEqualToString:@"OCCASIONAL"] || [hypothesis isEqualToString:@"OCTOBER"] || [hypothesis isEqualToString:@"OLD"] || [hypothesis isEqualToString:@"ONCE"] || [hypothesis isEqualToString:@"ORIGIN"] || [hypothesis isEqualToString:@"PAST"] || [hypothesis isEqualToString:@"PERIOD"] || [hypothesis isEqualToString:@"PRESENT"] || [hypothesis isEqualToString:@"SATURDAY"] || [hypothesis isEqualToString:@"SEMESTER"] || [hypothesis isEqualToString:@"SEPTEMBER"] || [hypothesis isEqualToString:@"SOMETIME"] || [hypothesis isEqualToString:@"SOON"] || [hypothesis isEqualToString:@"SPRING"] || [hypothesis isEqualToString:@"SUDDEN"] || [hypothesis isEqualToString:@"SUMMER"] || [hypothesis isEqualToString:@"SUNDAY"] || [hypothesis isEqualToString:@"TEMPORARY"] || [hypothesis isEqualToString:@"THEN"] || [hypothesis isEqualToString:@"THURSDAY"] || [hypothesis isEqualToString:@"TILL"] || [hypothesis isEqualToString:@"TIME"] || [hypothesis isEqualToString:@"TODAY"] || [hypothesis isEqualToString:@"TOMORROW"] || [hypothesis isEqualToString:@"TONIGHT"] || [hypothesis isEqualToString:@"TUESDAY"] || [hypothesis isEqualToString:@"UNTIL"] || [hypothesis isEqualToString:@"WEDNESDAY"] || [hypothesis isEqualToString:@"WEEK"] || [hypothesis isEqualToString:@"WHEN"] || [hypothesis isEqualToString:@"WHILE"] || [hypothesis isEqualToString:@"WINTER"] || [hypothesis isEqualToString:@"YEAR"] || [hypothesis isEqualToString:@"YESTERDAY"] || [hypothesis isEqualToString:@"YOUNG"]) {
-        semanticTime++;
+    NSArray *semanticTimeArray = [NSArray arrayWithObjects: @"AFTER", @"AGAIN", @"AGO", @"ALREADY", @"ALWAYS", @"ANNUAL", @"ANYTIME", @"APRIL", @"AUGUST", @"AUTUMN", @"BEFORE", @"BRIEF", @"CLOCK", @"DAY", @"DECADE", @"DECEMBER", @"DURING", @"END", @"ERA", @"ETERNITY", @"EVENING", @"FEBRUARY", @"FOREVER", @"FRIDAY", @"FUTURE", @"GENERATION", @"HISTORY", @"HOUR", @"IMMEDIATE", @"IMMORTAL", @"INSTANCE", @"JANUARY", @"JULY", @"JUNE", @"LAST", @"LATE", @"MARCH", @"MEANTIME", @"MEANWHILE", @"MINUTE", @"MOMENT", @"MONDAY", @"MONTH", @"MORNING", @"NEVER", @"NEXT", @"NIGHT", @"NOON", @"NOVEMBER", @"NOW", @"OCCASIONAL", @"OCTOBER", @"OLD", @"ONCE", @"ORIGIN", @"PAST", @"PERIOD", @"PRESENT", @"SATURDAY", @"SEMESTER", @"SEPTEMBER", @"SOMETIME", @"SOON", @"SPRING", @"SUDDEN", @"SUMMER", @"SUNDAY", @"TEMPORARY", @"THEN", @"THURSDAY", @"TILL", @"TIME", @"TODAY", @"TOMORROW", @"TONIGHT", @"TUESDAY", @"UNTIL", @"WEDNESDAY", @"WEEK", @"WHEN", @"WHILE", @"WINTER", @"YEAR", @"YESTERDAY", @"YOUNG", nil];
+    for (NSString *s in semanticTimeArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            semanticTime++;
+        }
     }
-    if([hypothesis isEqualToString:@"ACCEPTED"] || [hypothesis isEqualToString:@"ADMITTED"] || [hypothesis isEqualToString:@"AFFECTED"] || [hypothesis isEqualToString:@"APPEARED"] || [hypothesis isEqualToString:@"ASKED"] || [hypothesis isEqualToString:@"ATE"] || [hypothesis isEqualToString:@"BECAME"] || [hypothesis isEqualToString:@"BEEN"] || [hypothesis isEqualToString:@"BEGAN"] || [hypothesis isEqualToString:@"BELIEVED"] || [hypothesis isEqualToString:@"BOUGHT"] || [hypothesis isEqualToString:@"BROKEN"] || [hypothesis isEqualToString:@"BROUGHT"] || [hypothesis isEqualToString:@"CALLED"] || [hypothesis isEqualToString:@"CAME"] || [hypothesis isEqualToString:@"CARED"] || [hypothesis isEqualToString:@"CARRIED"] || [hypothesis isEqualToString:@"CHANGED"] || [hypothesis isEqualToString:@"CHEERED"] || [hypothesis isEqualToString:@"CONFIDED"] || [hypothesis isEqualToString:@"CRIED"] || [hypothesis isEqualToString:@"DEPENDED"] || [hypothesis isEqualToString:@"DESCRIBED"] || [hypothesis isEqualToString:@"DID"] || [hypothesis isEqualToString:@"DIED"] || [hypothesis isEqualToString:@"DISLIKED"] || [hypothesis isEqualToString:@"DONE"] || [hypothesis isEqualToString:@"DRANK"] || [hypothesis isEqualToString:@"DRIVEN"] || [hypothesis isEqualToString:@"DROVE"] || [hypothesis isEqualToString:@"DRUNK"] || [hypothesis isEqualToString:@"EATEN"] || [hypothesis isEqualToString:@"ENDED"] || [hypothesis isEqualToString:@"ENTERED"] || [hypothesis isEqualToString:@"EXPLAINED"] || [hypothesis isEqualToString:@"EXPRESSED"] || [hypothesis isEqualToString:@"FED"] || [hypothesis isEqualToString:@"FELT"] || [hypothesis isEqualToString:@"FLED"] || [hypothesis isEqualToString:@"FLEW"] || [hypothesis isEqualToString:@"FOLLOWED"] || [hypothesis isEqualToString:@"FOUGHT"] || [hypothesis isEqualToString:@"FOUND"] || [hypothesis isEqualToString:@"GAVE"] || [hypothesis isEqualToString:@"GIVEN"] || [hypothesis isEqualToString:@"GONE"] || [hypothesis isEqualToString:@"GOT"] || [hypothesis isEqualToString:@"GOTTEN"] || [hypothesis isEqualToString:@"GUESSED"] || [hypothesis isEqualToString:@"HAD"] || [hypothesis isEqualToString:@"HAPPENED"] || [hypothesis isEqualToString:@"HATED"] || [hypothesis isEqualToString:@"HEARD"] || [hypothesis isEqualToString:@"HELD"] || [hypothesis isEqualToString:@"HELPED"] || [hypothesis isEqualToString:@"HOPED"] || [hypothesis isEqualToString:@"INFERRED"] || [hypothesis isEqualToString:@"KEPT"] || [hypothesis isEqualToString:@"KNEW"] || [hypothesis isEqualToString:@"LEFT"] || [hypothesis isEqualToString:@"LIED"] || [hypothesis isEqualToString:@"LIKED"] || [hypothesis isEqualToString:@"LISTENED"] || [hypothesis isEqualToString:@"LIVED"] || [hypothesis isEqualToString:@"LOOKED"] || [hypothesis isEqualToString:@"LOST"] || [hypothesis isEqualToString:@"LOVED"] || [hypothesis isEqualToString:@"MADE"] || [hypothesis isEqualToString:@"MEANT"] || [hypothesis isEqualToString:@"MET"] || [hypothesis isEqualToString:@"MISSED"] || [hypothesis isEqualToString:@"MOVED"] || [hypothesis isEqualToString:@"NEEDED"] || [hypothesis isEqualToString:@"OWED"] || [hypothesis isEqualToString:@"PACKED"] || [hypothesis isEqualToString:@"PAID"] || [hypothesis isEqualToString:@"PAST"] || [hypothesis isEqualToString:@"PLAYED"] || [hypothesis isEqualToString:@"PROTESTED"] || [hypothesis isEqualToString:@"QUESTIONNED"] || [hypothesis isEqualToString:@"RAN"] || [hypothesis isEqualToString:@"REQUIRED"] || [hypothesis isEqualToString:@"RESOLVED"] || [hypothesis isEqualToString:@"RUBBED"] || [hypothesis isEqualToString:@"RUSHED"] || [hypothesis isEqualToString:@"SAID"] || [hypothesis isEqualToString:@"SAT"] || [hypothesis isEqualToString:@"SAW"] || [hypothesis isEqualToString:@"SEEMED"] || [hypothesis isEqualToString:@"SEEN"] || [hypothesis isEqualToString:@"SENSED"] || [hypothesis isEqualToString:@"SHARED"] || [hypothesis isEqualToString:@"SHOPPED"] || [hypothesis isEqualToString:@"SHOWED"] || [hypothesis isEqualToString:@"SMOKED"] || [hypothesis isEqualToString:@"SOLD"] || [hypothesis isEqualToString:@"SPENT"] || [hypothesis isEqualToString:@"SPOKE"] || [hypothesis isEqualToString:@"STARTED"] || [hypothesis isEqualToString:@"STAYED"] || [hypothesis isEqualToString:@"STOOD"] || [hypothesis isEqualToString:@"STOPPED"] || [hypothesis isEqualToString:@"STUCK"] || [hypothesis isEqualToString:@"STUDIED"] || [hypothesis isEqualToString:@"STUNNED"] || [hypothesis isEqualToString:@"SUCKED"] || [hypothesis isEqualToString:@"SUFFERED"] || [hypothesis isEqualToString:@"SUPPORTED"] || [hypothesis isEqualToString:@"SUPPOSED"] || [hypothesis isEqualToString:@"SURROUNDED"] || [hypothesis isEqualToString:@"TAKEN"] || [hypothesis isEqualToString:@"TALKED"] || [hypothesis isEqualToString:@"TAUGHT"] || [hypothesis isEqualToString:@"TENDED"] || [hypothesis isEqualToString:@"THANKED"] || [hypothesis isEqualToString:@"THOUGHT"] || [hypothesis isEqualToString:@"THREW"] || [hypothesis isEqualToString:@"TOLD"] || [hypothesis isEqualToString:@"TOOK"] || [hypothesis isEqualToString:@"TRIED"] || [hypothesis isEqualToString:@"TURNED"] || [hypothesis isEqualToString:@"UNDERSTOOD"] || [hypothesis isEqualToString:@"USED"] || [hypothesis isEqualToString:@"VIEWED"] || [hypothesis isEqualToString:@"WAITED"] || [hypothesis isEqualToString:@"WALKED"] || [hypothesis isEqualToString:@"WANTED"] || [hypothesis isEqualToString:@"WAS"] || [hypothesis isEqualToString:@"WENT"] || [hypothesis isEqualToString:@"WERE"] || [hypothesis isEqualToString:@"WISHED"] || [hypothesis isEqualToString:@"WOKE"] || [hypothesis isEqualToString:@"WON"] || [hypothesis isEqualToString:@"WONDERED"] || [hypothesis isEqualToString:@"WORE"] || [hypothesis isEqualToString:@"WORKED"] || [hypothesis isEqualToString:@"WRITTEN"] || [hypothesis isEqualToString:@"WROTE"] || [hypothesis isEqualToString:@"YESTERDAY"]) {
-        pastTenseVerbs++;
+    NSArray *pastTenseVerbsArray = [NSArray arrayWithObjects: @"ACCEPTED", @"ADMITTED", @"AFFECTED", @"APPEARED", @"ASKED", @"ATE", @"BECAME", @"BEEN", @"BEGAN", @"BELIEVED", @"BOUGHT", @"BROKEN", @"BROUGHT", @"CALLED", @"CAME", @"CARED", @"CARRIED", @"CHANGED", @"CHEERED", @"CONFIDED", @"CRIED", @"DEPENDED", @"DESCRIBED", @"DID", @"DIED", @"DISLIKED", @"DONE", @"DRANK", @"DRIVEN", @"DROVE", @"DRUNK", @"EATEN", @"ENDED", @"ENTERED", @"EXPLAINED", @"EXPRESSED", @"FED", @"FELT", @"FLED", @"FLEW", @"FOLLOWED", @"FOUGHT", @"FOUND", @"GAVE", @"GIVEN", @"GONE", @"GOT", @"GOTTEN", @"GUESSED", @"HAD", @"HAPPENED", @"HATED", @"HEARD", @"HELD", @"HELPED", @"HOPED", @"INFERRED", @"KEPT", @"KNEW", @"LEFT", @"LIED", @"LIKED", @"LISTENED", @"LIVED", @"LOOKED", @"LOST", @"LOVED", @"MADE", @"MEANT", @"MET", @"MISSED", @"MOVED", @"NEEDED", @"OWED", @"PACKED", @"PAID", @"PAST", @"PLAYED", @"PROTESTED", @"QUESTIONNED", @"RAN", @"REQUIRED", @"RESOLVED", @"RUBBED", @"RUSHED", @"SAID", @"SAT", @"SAW", @"SEEMED", @"SEEN", @"SENSED", @"SHARED", @"SHOPPED", @"SHOWED", @"SMOKED", @"SOLD", @"SPENT", @"SPOKE", @"STARTED", @"STAYED", @"STOOD", @"STOPPED", @"STUCK", @"STUDIED", @"STUNNED", @"SUCKED", @"SUFFERED", @"SUPPORTED", @"SUPPOSED", @"SURROUNDED", @"TAKEN", @"TALKED", @"TAUGHT", @"TENDED", @"THANKED", @"THOUGHT", @"THREW", @"TOLD", @"TOOK", @"TRIED", @"TURNED", @"UNDERSTOOD", @"USED", @"VIEWED", @"WAITED", @"WALKED", @"WANTED", @"WAS", @"WENT", @"WERE", @"WISHED", @"WOKE", @"WON", @"WONDERED", @"WORE", @"WORKED", @"WRITTEN", @"WROTE", @"YESTERDAY", nil];
+    for (NSString *s in pastTenseVerbsArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            pastTenseVerbs++;
+        }
     }
-    if([hypothesis isEqualToString:@"HE'LL"] || [hypothesis isEqualToString:@"I'LL"] || [hypothesis isEqualToString:@"IT'LL"] || [hypothesis isEqualToString:@"MAY"] || [hypothesis isEqualToString:@"MIGHT"] || [hypothesis isEqualToString:@"SHALL"] || [hypothesis isEqualToString:@"SHE'LL"] || [hypothesis isEqualToString:@"THEY'LL"] || [hypothesis isEqualToString:@"WE'LL"] || [hypothesis isEqualToString:@"WILL"] || [hypothesis isEqualToString:@"WON'T"] || [hypothesis isEqualToString:@"YOU'LL"]) {
-        futureTenseVerbs++;
+    NSArray *futureTenseVerbsArray = [NSArray arrayWithObjects: @"HE'LL", @"I'LL", @"IT'LL", @"MAY", @"MIGHT", @"SHALL", @"SHE'LL", @"THEY'LL", @"WE'LL", @"WILL", @"WON'T", @"YOU'LL", nil];
+    for (NSString *s in futureTenseVerbsArray)
+    {
+        if ([hypothesis rangeOfString:s].location != NSNotFound) {
+            futureTenseVerbs++;
+        }
     }
+    
     // tallies
     totalFirstPerson = firstPersonSingular + firstPersonPlural;
     totalWords = overSixLetters + firstPersonSingular + firstPersonPlural + totalFirstPerson + secondPerson + thirdPerson + articles + semanticCausation + pastTenseVerbs + futureTenseVerbs + semanticTime;
@@ -597,11 +635,11 @@ bool truth;
     // print all
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
     NSLog(@"\n Words Over Six Characters = %f percent \n First Person Singular Pronouns = %f percent \n First Person Plural Pronouns = %f percent \n Total First Person Pronouns = %f percent \n Second Person Pronouns = %f percent \n Third Person Pronouns = %f percent \n Articles = %f percent \n Causation Words = %f percent \n Past Tense Verbs = %f percent \n Future Tense Verbs = %f percent \n Time Words = %f percent \n Sample Size = %f words", overSixLettersPercent, firstPersonSingularPercent, firstPersonPluralPercent, totalFirstPersonPercent, secondPersonPercent, thirdPersonPercent, articlesPercent, semanticCausationPercent, pastTenseVerbsPercent, futureTenseVerbsPercent, semanticTimePercent, totalWords);
-    NSLog(@"\n Happiness Score = %d /240 \n Sadness Score = %d /240 \n Anger Score = %d /240 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead);
+    NSLog(@"\n Happiness Score = %d /255 \n Sadness Score = %d /255 \n Anger Score = %d /255 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead);
     
     // display words and scores in app
 	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"Happiness Score = %d /240 \n Sadness Score = %d /240 \n Anger Score = %d /240 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead]; // score
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"Happiness Score = %d /255 \n Sadness Score = %d /255 \n Anger Score = %d /255 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead]; // score
 }
 
 #ifdef kGetNbest
@@ -702,7 +740,6 @@ bool truth;
 - (void) testRecognitionCompleted {
 	NSLog(@"A test file which was submitted for direct recognition via the audio driver is done.");
     [self.pocketsphinxController stopListening];
-    
 }
 
 #pragma mark -
@@ -714,10 +751,8 @@ bool truth;
     //NSGradient(angry,happy,sad);
 }
 
-- (IBAction) refreshButtonAction { // refresh
-    //[self startListening];
-    //[self.pocketsphinxController stopListening];
-    // if (refreshButton = pressed) { }
+- (IBAction) refreshButtonAction { // return all values to zero, happens on command and at midnight
+    // connect to refreshButton, and timestamp
     overSixLetters=0;
     firstPersonSingular=0;
     firstPersonPlural=0;
@@ -737,7 +772,6 @@ bool truth;
     honesty=0;
     lackConfidence=0;
     confidence=0;
-	//self.refreshButton.hidden = FALSE;
 }
 
 /*

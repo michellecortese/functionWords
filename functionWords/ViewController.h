@@ -19,7 +19,6 @@
 	OpenEarsEventsObserver *openEarsEventsObserver; // observational class
 	PocketsphinxController *pocketsphinxController; // voice recognition controller
 	FliteController *fliteController; // tts controller
-
     IBOutlet UIButton *refreshButton;
     IBOutlet UILabel *statusTextView;
     IBOutlet UILabel *heardTextView;
@@ -28,7 +27,7 @@
     IBOutlet UILabel *outputDisplayBox;
 }
 
-// ui
+// actions
 - (IBAction) displayOutputs;
 - (IBAction) refreshButtonAction;
 
@@ -36,8 +35,6 @@
 @property (nonatomic, strong) OpenEarsEventsObserver *openEarsEventsObserver;
 @property (nonatomic, strong) PocketsphinxController *pocketsphinxController;
 @property (nonatomic, strong) FliteController *fliteController;
-
-// ui
 @property (nonatomic, strong) IBOutlet UIButton *refreshButton;
 @property (nonatomic, strong) IBOutlet UILabel *statusTextView;
 @property (nonatomic, strong) IBOutlet UILabel *heardTextView;
