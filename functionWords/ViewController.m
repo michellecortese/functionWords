@@ -766,10 +766,6 @@ NSString *truthRead = nil;
 
 // ui shizz
 
-- (void) genernateGradient {
-    //NSGradient(angry,happy,sad);
-}
-
 - (IBAction)refreshButton:(id)sender { // clear all results
     overSixLetters=0;
     firstPersonSingular=0;
