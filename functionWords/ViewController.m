@@ -12,6 +12,7 @@
 #import <OpenEars/LanguageModelGenerator.h>
 #import <OpenEars/OpenEarsLogging.h>
 #import <OpenEars/AcousticModel.h>
+#import "MCCrystalViewController.h"
 
 @implementation ViewController
 
@@ -24,6 +25,7 @@
 @synthesize fliteDbLabel;
 @synthesize openEarsEventsObserver;
 @synthesize slt;
+@synthesize crystalViewController=_crystalViewController;
 
 // dictionary building assets
 NSDictionary *languageGeneratorResults = nil;
@@ -117,8 +119,27 @@ NSString *truthRead = nil;
 	return openEarsEventsObserver;
 }
 
+- (MCCrystalViewController *)crystalViewController {
+    if (_crystalViewController == nil) {
+        _crystalViewController = [[MCCrystalViewController alloc] initWithNibName:@"MCCrystalViewController" bundle:nil];
+        _crystalViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        _crystalViewController.dismissDelegate = self;
+    }
+    return _crystalViewController;
+}
+
 - (void) startListening {
     [self.pocketsphinxController startListeningWithLanguageModelAtPath:lmPath dictionaryAtPath:dicPath acousticModelAtPath:[AcousticModel pathToModel:@"AcousticModelEnglish"] languageModelIsJSGF:NO];
+}
+
+- (IBAction)flip:(id)sender {
+    [self presentViewController:self.crystalViewController animated:YES completion:nil];
+}
+
+#pragma mark - Crystal Delegate
+
+- (void)crystalViewControllerDidFinish:(MCCrystalViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -

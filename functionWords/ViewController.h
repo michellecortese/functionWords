@@ -9,12 +9,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Slt/Slt.h>
+#import "MCCrystalViewController.h"
 
 @class PocketsphinxController;
 @class FliteController;
 #import <OpenEars/OpenEarsEventsObserver.h>
 
-@interface ViewController : UIViewController <OpenEarsEventsObserverDelegate> {
+@interface ViewController : UIViewController <OpenEarsEventsObserverDelegate, MCCrystalViewControllerDelegate> {
 	Slt *slt;
 	OpenEarsEventsObserver *openEarsEventsObserver; // observational class
 	PocketsphinxController *pocketsphinxController; // voice recognition controller
@@ -24,6 +25,7 @@
 	IBOutlet UILabel *pocketsphinxDbLabel;
 	IBOutlet UILabel *fliteDbLabel;
     IBOutlet UILabel *outputDisplayBox;
+    MCCrystalViewController *_crystalViewController;
 }
 
 // actions
@@ -38,6 +40,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *pocketsphinxDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *fliteDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *outputDisplayBox;
+@property (nonatomic, strong) MCCrystalViewController *crystalViewController;
+
+- (IBAction)flip:(id)sender;
 
 @end
 

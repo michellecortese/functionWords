@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E3A7D8718D9FD8F0075CDAA /* CrystalUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3A7D8618D9FD8F0075CDAA /* CrystalUIView.m */; };
+		7E62820718D921B70073BAAA /* MCCrystalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E62820518D921B70073BAAA /* MCCrystalViewController.m */; };
+		7E62820818D921B70073BAAA /* MCCrystalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E62820618D921B70073BAAA /* MCCrystalViewController.xib */; };
 		7E9416C9189894F900244CCE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9416C8189894F900244CCE /* Foundation.framework */; };
 		7E9416CB189894F900244CCE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9416CA189894F900244CCE /* CoreGraphics.framework */; };
 		7E9416CD189894F900244CCE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9416CC189894F900244CCE /* UIKit.framework */; };
@@ -40,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E3A7D8518D9FD8E0075CDAA /* CrystalUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrystalUIView.h; sourceTree = "<group>"; };
+		7E3A7D8618D9FD8F0075CDAA /* CrystalUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrystalUIView.m; sourceTree = "<group>"; };
+		7E62820418D921B70073BAAA /* MCCrystalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCrystalViewController.h; sourceTree = "<group>"; };
+		7E62820518D921B70073BAAA /* MCCrystalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCrystalViewController.m; sourceTree = "<group>"; };
+		7E62820618D921B70073BAAA /* MCCrystalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCCrystalViewController.xib; sourceTree = "<group>"; };
 		7E9416C5189894F900244CCE /* functionWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = functionWords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9416C8189894F900244CCE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7E9416CA189894F900244CCE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +146,11 @@
 				7E9416DE189894F900244CCE /* ViewController.m */,
 				7E9416E0189894F900244CCE /* Images.xcassets */,
 				7E9416CF189894F900244CCE /* Supporting Files */,
+				7E62820418D921B70073BAAA /* MCCrystalViewController.h */,
+				7E62820518D921B70073BAAA /* MCCrystalViewController.m */,
+				7E62820618D921B70073BAAA /* MCCrystalViewController.xib */,
+				7E3A7D8518D9FD8E0075CDAA /* CrystalUIView.h */,
+				7E3A7D8618D9FD8F0075CDAA /* CrystalUIView.m */,
 			);
 			path = functionWords;
 			sourceTree = "<group>";
@@ -261,6 +274,7 @@
 				7E9416E1189894F900244CCE /* Images.xcassets in Resources */,
 				7EE3109F18A9E9A700DEE37F /* AcousticModelSpanish.bundle in Resources */,
 				7EE3109E18A9E9A700DEE37F /* AcousticModelEnglish.bundle in Resources */,
+				7E62820818D921B70073BAAA /* MCCrystalViewController.xib in Resources */,
 				7E9416D3189894F900244CCE /* InfoPlist.strings in Resources */,
 				7E9416DC189894F900244CCE /* Main.storyboard in Resources */,
 			);
@@ -281,7 +295,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E3A7D8718D9FD8F0075CDAA /* CrystalUIView.m in Sources */,
 				7E9416DF189894F900244CCE /* ViewController.m in Sources */,
+				7E62820718D921B70073BAAA /* MCCrystalViewController.m in Sources */,
 				7E9416D9189894F900244CCE /* AppDelegate.m in Sources */,
 				7E9416D5189894F900244CCE /* main.m in Sources */,
 			);
