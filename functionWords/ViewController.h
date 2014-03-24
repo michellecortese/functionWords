@@ -13,6 +13,7 @@
 
 @class PocketsphinxController;
 @class FliteController;
+
 #import <OpenEars/OpenEarsEventsObserver.h>
 
 @interface ViewController : UIViewController <OpenEarsEventsObserverDelegate, MCCrystalViewControllerDelegate> {
@@ -26,6 +27,12 @@
 	IBOutlet UILabel *fliteDbLabel;
     IBOutlet UILabel *outputDisplayBox;
     MCCrystalViewController *_crystalViewController;
+    // output assets
+    float happy; float sad; float angry; // mood alphas
+    int disHonesty; int honesty;
+    int lackConfidence; int confidence; // confidence #
+    bool power;
+    bool truth; // truth bool
 }
 
 // actions

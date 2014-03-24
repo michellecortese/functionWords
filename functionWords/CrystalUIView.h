@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CrystalUIView : UIView
+@interface CrystalUIView : UIView {
+    
+}
 
 @end

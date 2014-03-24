@@ -40,7 +40,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Scores:" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="CHv-7l-ggt">
-                                <rect key="frame" x="40" y="324" width="240" height="142"/>
+                                <rect key="frame" x="20" y="322" width="280" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96223250680000005" green="0.96156618540000005" blue="0.91081421829999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>

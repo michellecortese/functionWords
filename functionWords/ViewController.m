@@ -60,16 +60,6 @@ float futureTenseVerbsPercent;
 float semanticTimePercent;
 float totalWordsPercent;
 
-// output assets
-int happy;
-int sad;
-int angry;
-int disHonesty;
-int honesty;
-int lackConfidence;
-int confidence;
-bool power;
-bool truth;
 NSString *powerRead = nil;
 NSString *truthRead = nil;
 
@@ -459,6 +449,7 @@ NSString *truthRead = nil;
     }
     
     // initial ui shizz
+    
 }
 
 #pragma mark -
@@ -552,67 +543,67 @@ NSString *truthRead = nil;
     
     // outputs
     // happy
-    if (pastTenseVerbsPercent < 11 && happy < 244){
-        happy = happy+10;
-    } else if (pastTenseVerbsPercent > 11 && happy > 9){
-        happy = happy-10;
+    if (pastTenseVerbsPercent < 11 && happy < 0.96){
+        happy = happy+0.05;
+    } else if (pastTenseVerbsPercent > 11 && happy > 0.04){
+        happy = happy-0.05;
     }
-    if (futureTenseVerbsPercent < 2 && happy < 244){
-        happy = happy+10;
-    } else if (futureTenseVerbsPercent > 2 && happy > 9){
-        happy = happy-10;
+    if (futureTenseVerbsPercent < 2 && happy < 0.96){
+        happy = happy+0.05;
+    } else if (futureTenseVerbsPercent > 2 && happy > 0.04){
+        happy = happy-0.05;
     }
-    if (firstPersonPluralPercent > 2 && happy < 244){
-        happy = happy+10;
-    } else if (firstPersonPluralPercent < 2 && happy > 9){
-        happy = happy-10;
+    if (firstPersonPluralPercent > 2 && happy < 0.96){
+        happy = happy+0.05;
+    } else if (firstPersonPluralPercent < 2 && happy > 0.04){
+        happy = happy-0.05;
     }
-    if (semanticTimePercent > 9 && happy < 244){
-        happy = happy+10;
-    } else if (semanticTimePercent < 9 && happy > 9){
-        happy = happy-10;
+    if (semanticTimePercent > 0.04 && happy < 0.96){
+        happy = happy+0.05;
+    } else if (semanticTimePercent < 0.04 && happy > 0.04){
+        happy = happy-0.05;
     }
     // sad
-    if (firstPersonSingularPercent > 16 && sad < 244){
-        sad = sad+10;
-    } else if (firstPersonSingularPercent < 16 && sad > 9){
-        sad = sad-10;
+    if (firstPersonSingularPercent > 16 && sad < 0.96){
+        sad = sad+0.05;
+    } else if (firstPersonSingularPercent < 16 && sad > 0.04){
+        sad = sad-0.05;
     }
-    if (pastTenseVerbsPercent > 11 && sad < 244){
-        sad = sad+10;
-    } else if (pastTenseVerbsPercent < 11 && sad > 9){
-        sad = sad-10;
+    if (pastTenseVerbsPercent > 11 && sad < 0.96){
+        sad = sad+0.05;
+    } else if (pastTenseVerbsPercent < 11 && sad > 0.04){
+        sad = sad-0.05;
     }
-    if (futureTenseVerbsPercent > 2 && sad < 244){
-        sad = sad+10;
-    } else if (futureTenseVerbsPercent < 2 && sad > 9){
-        sad = sad-10;
+    if (futureTenseVerbsPercent > 2 && sad < 0.96){
+        sad = sad+0.05;
+    } else if (futureTenseVerbsPercent < 2 && sad > 0.04){
+        sad = sad-0.05;
     }
-    if (semanticCausationPercent > 1 && sad < 244){
-        sad = sad+10;
-    } else if (semanticCausationPercent < 1 && sad > 9){
-        sad = sad-10;
+    if (semanticCausationPercent > 1 && sad < 0.96){
+        sad = sad+0.05;
+    } else if (semanticCausationPercent < 1 && sad > 0.04){
+        sad = sad-0.05;
     }
     // angry
-    if (secondPersonPercent > 1 && angry < 244){
-        angry = angry+10;
-    } else if (secondPersonPercent < 1 && angry > 9){
-        angry = angry-10;
+    if (secondPersonPercent > 1 && angry < 0.96){
+        angry = angry+0.05;
+    } else if (secondPersonPercent < 1 && angry > 0.04){
+        angry = angry-0.05;
     }
-    if (thirdPersonPercent > 10 && angry < 244){
-        angry = angry+10;
-    } else if (thirdPersonPercent < 10 && angry > 9){
-        angry = angry-10;
+    if (thirdPersonPercent > 0.05 && angry < 0.96){
+        angry = angry+0.05;
+    } else if (thirdPersonPercent < 0.05 && angry > 0.04){
+        angry = angry-0.05;
     }
-    if (pastTenseVerbsPercent < 11 && angry < 244){
-        angry = angry+10;
-    } else if (pastTenseVerbsPercent > 11 && angry > 9){
-        angry = angry-10;
+    if (pastTenseVerbsPercent < 11 && angry < 0.96){
+        angry = angry+0.05;
+    } else if (pastTenseVerbsPercent > 11 && angry > 0.04){
+        angry = angry-0.05;
     }
-    if (semanticCausationPercent > 1 && angry < 244){
-        angry = angry+10;
-    } else if (semanticCausationPercent < 1 && angry > 9){
-        angry = angry-10;
+    if (semanticCausationPercent > 1 && angry < 0.96){
+        angry = angry+0.05;
+    } else if (semanticCausationPercent < 1 && angry > 0.04){
+        angry = angry-0.05;
     }
     // confidence
     if (firstPersonPluralPercent > 2){confidence++;}
@@ -654,11 +645,11 @@ NSString *truthRead = nil;
     // print all
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
     NSLog(@"\n Words Over Six Characters = %f percent \n First Person Singular Pronouns = %f percent \n First Person Plural Pronouns = %f percent \n Total First Person Pronouns = %f percent \n Second Person Pronouns = %f percent \n Third Person Pronouns = %f percent \n Articles = %f percent \n Causation Words = %f percent \n Past Tense Verbs = %f percent \n Future Tense Verbs = %f percent \n Time Words = %f percent \n Sample Size = %f words", overSixLettersPercent, firstPersonSingularPercent, firstPersonPluralPercent, totalFirstPersonPercent, secondPersonPercent, thirdPersonPercent, articlesPercent, semanticCausationPercent, pastTenseVerbsPercent, futureTenseVerbsPercent, semanticTimePercent, totalWords);
-    NSLog(@"\n Happiness Score = %d /255 \n Sadness Score = %d /255 \n Anger Score = %d /255 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead);
+    NSLog(@"\n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead);
     
     // display words and scores in app
 	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %d /255 \n Sadness Score = %d /255 \n Anger Score = %d /255 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead]; // score
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead]; // score
 }
 
 #ifdef kGetNbest
@@ -788,7 +779,7 @@ NSString *truthRead = nil;
     confidence=0;
     truthRead = @"Average";
     powerRead = @"Average";
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %d /255 \n Sadness Score = %d /255 \n Anger Score = %d /255 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead];
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead];
 }
 
 #pragma mark -
