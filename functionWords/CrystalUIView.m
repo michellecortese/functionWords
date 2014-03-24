@@ -10,7 +10,6 @@
 
 @implementation CrystalUIView
 
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,6 +20,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    //and then access the variable by appDelegate.variable
     // graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();
     // gradient initialization
@@ -60,6 +60,10 @@
     CGContextAddQuadCurveToPoint(context, 250, 110, 200, 400);
     CGContextStrokePath(context);
     
+}
+
+- (void)timerPing:(NSTimer *)theTimer{
+    [self setNeedsDisplay];
 }
 
 @end

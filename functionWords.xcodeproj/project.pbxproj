@@ -139,6 +139,11 @@
 		7E9416CE189894F900244CCE /* functionWords */ = {
 			isa = PBXGroup;
 			children = (
+				7E62820418D921B70073BAAA /* MCCrystalViewController.h */,
+				7E62820518D921B70073BAAA /* MCCrystalViewController.m */,
+				7E62820618D921B70073BAAA /* MCCrystalViewController.xib */,
+				7E3A7D8518D9FD8E0075CDAA /* CrystalUIView.h */,
+				7E3A7D8618D9FD8F0075CDAA /* CrystalUIView.m */,
 				7E9416D7189894F900244CCE /* AppDelegate.h */,
 				7E9416D8189894F900244CCE /* AppDelegate.m */,
 				7E9416DA189894F900244CCE /* Main.storyboard */,
@@ -146,11 +151,6 @@
 				7E9416DE189894F900244CCE /* ViewController.m */,
 				7E9416E0189894F900244CCE /* Images.xcassets */,
 				7E9416CF189894F900244CCE /* Supporting Files */,
-				7E62820418D921B70073BAAA /* MCCrystalViewController.h */,
-				7E62820518D921B70073BAAA /* MCCrystalViewController.m */,
-				7E62820618D921B70073BAAA /* MCCrystalViewController.xib */,
-				7E3A7D8518D9FD8E0075CDAA /* CrystalUIView.h */,
-				7E3A7D8618D9FD8F0075CDAA /* CrystalUIView.m */,
 			);
 			path = functionWords;
 			sourceTree = "<group>";
@@ -242,6 +242,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Michelle Cortese";
 				TargetAttributes = {
+					7E9416C4189894F900244CCE = {
+						DevelopmentTeam = UVKWH3RNQZ;
+					};
 					7E9416E5189894F900244CCE = {
 						TestTargetID = 7E9416C4189894F900244CCE;
 					};
@@ -426,6 +429,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/mcortese_/Code/functionWords/Framework,
@@ -434,6 +439,7 @@
 				GCC_PREFIX_HEADER = "functionWords/functionWords-Prefix.pch";
 				INFOPLIST_FILE = "functionWords/functionWords-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -443,6 +449,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/mcortese_/Code/functionWords/Framework,
@@ -451,6 +459,7 @@
 				GCC_PREFIX_HEADER = "functionWords/functionWords-Prefix.pch";
 				INFOPLIST_FILE = "functionWords/functionWords-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

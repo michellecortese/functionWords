@@ -27,16 +27,20 @@
 	IBOutlet UILabel *fliteDbLabel;
     IBOutlet UILabel *outputDisplayBox;
     MCCrystalViewController *_crystalViewController;
-    // output assets
-    float happy; float sad; float angry; // mood alphas
-    int disHonesty; int honesty;
-    int lackConfidence; int confidence; // confidence #
-    bool power;
-    bool truth; // truth bool
+    float happy;
+    float sad;
+    float angry;
+    int disHonesty;
+    int honesty;
+    int lackConfidence;
+    int confidence;
+    BOOL power;
+    BOOL truth;
 }
 
 // actions
 - (IBAction)refreshButton:(id)sender;
+- (IBAction)flip:(id)sender;
 
 @property (nonatomic, strong) Slt *slt;
 @property (nonatomic, strong) OpenEarsEventsObserver *openEarsEventsObserver;
@@ -48,8 +52,6 @@
 @property (nonatomic, strong) IBOutlet UILabel *fliteDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *outputDisplayBox;
 @property (nonatomic, strong) MCCrystalViewController *crystalViewController;
-
-- (IBAction)flip:(id)sender;
 
 @end
 
