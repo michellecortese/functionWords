@@ -8,8 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    CGFloat happy;
+    CGFloat sad;
+    CGFloat angry;
+    CGFloat power;
+    BOOL truth;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) CGFloat globalHappy;
+@property (nonatomic) CGFloat globalSad;
+@property (nonatomic) CGFloat globalAngry;
+@property (nonatomic) CGFloat globalPower;
+@property (nonatomic) BOOL globalTruth;
 
 @end

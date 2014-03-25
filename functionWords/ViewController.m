@@ -13,7 +13,7 @@
 #import <OpenEars/OpenEarsLogging.h>
 #import <OpenEars/AcousticModel.h>
 #import "MCCrystalViewController.h"
-
+#import "AppDelegate.h"
 
 @implementation ViewController
 
@@ -34,33 +34,43 @@ NSString *lmPath = nil;
 NSString *dicPath = nil;
 
 // word counting assets
-float overSixLetters;
-float firstPersonSingular;
-float firstPersonPlural;
-float totalFirstPerson;
-float secondPerson;
-float thirdPerson;
-float articles;
-float semanticCausation;
-float pastTenseVerbs;
-float futureTenseVerbs;
-float semanticTime;
-float totalWords;
+CGFloat overSixLetters;
+CGFloat firstPersonSingular;
+CGFloat firstPersonPlural;
+CGFloat totalFirstPerson;
+CGFloat secondPerson;
+CGFloat thirdPerson;
+CGFloat articles;
+CGFloat semanticCausation;
+CGFloat pastTenseVerbs;
+CGFloat futureTenseVerbs;
+CGFloat semanticTime;
+CGFloat totalWords;
 
 // percentage assets
-float overSixLettersPercent;
-float firstPersonSingularPercent;
-float firstPersonPluralPercent;
-float totalFirstPersonPercent;
-float secondPersonPercent;
-float thirdPersonPercent;
-float articlesPercent;
-float semanticCausationPercent;
-float pastTenseVerbsPercent;
-float futureTenseVerbsPercent;
-float semanticTimePercent;
-float totalWordsPercent;
+CGFloat overSixLettersPercent;
+CGFloat firstPersonSingularPercent;
+CGFloat firstPersonPluralPercent;
+CGFloat totalFirstPersonPercent;
+CGFloat secondPersonPercent;
+CGFloat thirdPersonPercent;
+CGFloat articlesPercent;
+CGFloat semanticCausationPercent;
+CGFloat pastTenseVerbsPercent;
+CGFloat futureTenseVerbsPercent;
+CGFloat semanticTimePercent;
+CGFloat totalWordsPercent;
 
+// output assets
+CGFloat happy;
+CGFloat sad;
+CGFloat angry;
+CGFloat disHonesty;
+CGFloat honesty;
+CGFloat lackConfidence;
+CGFloat confidence;
+BOOL power;
+BOOL truth;
 NSString *powerRead = nil;
 NSString *truthRead = nil;
 
@@ -139,9 +149,7 @@ NSString *truthRead = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.openEarsEventsObserver setDelegate:self]; // delegate of OpenEarsObserver class
-    
-    LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
-    
+    LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init]; // language model
     NSArray *languageArray = [NSArray arrayWithObjects:   @"A",
                               @"ACCEPTED",
                               @"ADMITTED",
@@ -460,6 +468,8 @@ NSString *truthRead = nil;
 // word counts occur, percentages calculated, outcomes drawn
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
     
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]; // access global variables
+    
     // if user says a category word, add to that category
     NSArray *firstPersonSingularArray = [NSArray arrayWithObjects: @"I", @"ME", @"MINE", @"MY", nil];
     for (NSString *s in firstPersonSingularArray)
@@ -651,6 +661,12 @@ NSString *truthRead = nil;
     // display words and scores in app
 	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
     self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead]; // score
+    
+    appDelegate.globalHappy = happy;
+    appDelegate.globalSad = sad;
+    appDelegate.globalAngry = angry;
+    appDelegate.globalPower = confidence;
+    appDelegate.globalTruth = truth;
 }
 
 #ifdef kGetNbest
@@ -781,6 +797,12 @@ NSString *truthRead = nil;
     truthRead = @"Average";
     powerRead = @"Average";
     self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]; // access global variables
+    appDelegate.globalHappy = happy;
+    appDelegate.globalSad = sad;
+    appDelegate.globalAngry = angry;
+    appDelegate.globalPower = confidence;
+    appDelegate.globalTruth = truth;
 }
 
 #pragma mark -

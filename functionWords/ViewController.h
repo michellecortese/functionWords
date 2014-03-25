@@ -27,15 +27,6 @@
 	IBOutlet UILabel *fliteDbLabel;
     IBOutlet UILabel *outputDisplayBox;
     MCCrystalViewController *_crystalViewController;
-    float happy;
-    float sad;
-    float angry;
-    int disHonesty;
-    int honesty;
-    int lackConfidence;
-    int confidence;
-    BOOL power;
-    BOOL truth;
 }
 
 // actions

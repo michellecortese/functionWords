@@ -10,6 +10,11 @@
 
 @implementation AppDelegate
 
+@synthesize globalHappy;
+@synthesize globalSad;
+@synthesize globalAngry;
+@synthesize globalPower;
+@synthesize globalTruth;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

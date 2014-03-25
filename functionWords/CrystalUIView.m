@@ -7,6 +7,7 @@
 //
 
 #import "CrystalUIView.h"
+#import "AppDelegate.h"
 
 @implementation CrystalUIView
 
@@ -20,7 +21,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    //and then access the variable by appDelegate.variable
+    // access global data
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     // graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();
     // gradient initialization
@@ -28,9 +30,9 @@
     CGColorSpaceRef colorspace;
     CGFloat locations[4] = { 0.05, 0.45, 0.55, 0.95 };
     // allocation of gradient alpha
-    float sadAlpha = 0.7;
-    float happyAlpha = 0.7;
-    float angryyAlpha = 0.7;
+    float sadAlpha = appDelegate.globalSad;
+    float happyAlpha = appDelegate.globalHappy;
+    float angryyAlpha = appDelegate.globalAngry;
     // rgb colors
     UIColor *sadColor = [UIColor colorWithRed:0.43 green:0.38 blue:0.68 alpha:sadAlpha];
     UIColor *happyColor = [UIColor colorWithRed:0.96 green:0.84 blue:0.51 alpha:happyAlpha];
@@ -47,6 +49,11 @@
     startPoint.x = 160; startPoint.y = 0.0; endPoint.x = 160; endPoint.y = 568;
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
     
+    /*
+     float powerAmount = appDelegate.globalPower; // amount of points
+     bool truthCurve = appDelegate.globalTruth; // bezier curves on/off
+     */
+    
     // generate random points
     CGPoint randomPoint;
     randomPoint.x = arc4random() % 320;
@@ -61,9 +68,10 @@
     CGContextStrokePath(context);
     
 }
-
-- (void)timerPing:(NSTimer *)theTimer{
+/*
+- (void)timerPing:(NSTimer *)theTimer{ // after # seconds, update display
     [self setNeedsDisplay];
-}
+
+}*/
 
 @end
