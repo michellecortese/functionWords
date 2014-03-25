@@ -1,18 +1,18 @@
 //
-//  MCCrystalViewController.m
+//  CrystalViewController.m
 //  functionWords
 //
 //  Created by Michelle Cortese on 2014-03-18.
 //  Copyright (c) 2014 Michelle Cortese. All rights reserved.
 //
 
-#import "MCCrystalViewController.h"
+#import "CrystalViewController.h"
 
-@interface MCCrystalViewController ()
+@interface CrystalViewController ()
 
 @end
 
-@implementation MCCrystalViewController
+@implementation CrystalViewController
 @synthesize dismissDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

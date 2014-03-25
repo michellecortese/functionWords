@@ -9,14 +9,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Slt/Slt.h>
-#import "MCCrystalViewController.h"
+#import "CrystalViewController.h"
 
 @class PocketsphinxController;
 @class FliteController;
 
 #import <OpenEars/OpenEarsEventsObserver.h>
 
-@interface ViewController : UIViewController <OpenEarsEventsObserverDelegate, MCCrystalViewControllerDelegate> {
+@interface ViewController : UIViewController <OpenEarsEventsObserverDelegate, CrystalViewControllerDelegate> {
 	Slt *slt;
 	OpenEarsEventsObserver *openEarsEventsObserver; // observational class
 	PocketsphinxController *pocketsphinxController; // voice recognition controller
@@ -26,7 +26,7 @@
 	IBOutlet UILabel *pocketsphinxDbLabel;
 	IBOutlet UILabel *fliteDbLabel;
     IBOutlet UILabel *outputDisplayBox;
-    MCCrystalViewController *_crystalViewController;
+    CrystalViewController *_crystalViewController;
 }
 
 // actions
@@ -42,7 +42,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *pocketsphinxDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *fliteDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *outputDisplayBox;
-@property (nonatomic, strong) MCCrystalViewController *crystalViewController;
+@property (nonatomic, strong) CrystalViewController *crystalViewController;
 
 @end
 

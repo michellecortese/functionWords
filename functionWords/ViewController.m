@@ -12,7 +12,7 @@
 #import <OpenEars/LanguageModelGenerator.h>
 #import <OpenEars/OpenEarsLogging.h>
 #import <OpenEars/AcousticModel.h>
-#import "MCCrystalViewController.h"
+#import "CrystalViewController.h"
 #import "AppDelegate.h"
 
 @implementation ViewController
@@ -120,9 +120,9 @@ NSString *truthRead = nil;
 	return openEarsEventsObserver;
 }
 
-- (MCCrystalViewController *)crystalViewController {
+- (CrystalViewController *)crystalViewController {
     if (_crystalViewController == nil) {
-        _crystalViewController = [[MCCrystalViewController alloc] initWithNibName:@"MCCrystalViewController" bundle:nil];
+        _crystalViewController = [[CrystalViewController alloc] initWithNibName:@"CrystalViewController" bundle:nil];
         _crystalViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         _crystalViewController.dismissDelegate = self;
     }
@@ -139,7 +139,7 @@ NSString *truthRead = nil;
 
 #pragma mark - Crystal Delegate
 
-- (void)crystalViewControllerDidFinish:(MCCrystalViewController *)viewController {
+- (void)crystalViewControllerDidFinish:(CrystalViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -653,20 +653,22 @@ NSString *truthRead = nil;
         truthRead = @"Average";
     }
     
-    // print all
-    NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
-    NSLog(@"\n Words Over Six Characters = %f percent \n First Person Singular Pronouns = %f percent \n First Person Plural Pronouns = %f percent \n Total First Person Pronouns = %f percent \n Second Person Pronouns = %f percent \n Third Person Pronouns = %f percent \n Articles = %f percent \n Causation Words = %f percent \n Past Tense Verbs = %f percent \n Future Tense Verbs = %f percent \n Time Words = %f percent \n Sample Size = %f words", overSixLettersPercent, firstPersonSingularPercent, firstPersonPluralPercent, totalFirstPersonPercent, secondPersonPercent, thirdPersonPercent, articlesPercent, semanticCausationPercent, pastTenseVerbsPercent, futureTenseVerbsPercent, semanticTimePercent, totalWords);
-    NSLog(@"\n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead);
-    
-    // display words and scores in app
-	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead]; // score
-    
+    // drop into global variables
     appDelegate.globalHappy = happy;
     appDelegate.globalSad = sad;
     appDelegate.globalAngry = angry;
-    appDelegate.globalPower = confidence;
+    appDelegate.globalPower = confidence/totalWords;
     appDelegate.globalTruth = truth;
+    
+    // print all
+    NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
+    NSLog(@"\n Words Over Six Characters = %f percent \n First Person Singular Pronouns = %f percent \n First Person Plural Pronouns = %f percent \n Total First Person Pronouns = %f percent \n Second Person Pronouns = %f percent \n Third Person Pronouns = %f percent \n Articles = %f percent \n Causation Words = %f percent \n Past Tense Verbs = %f percent \n Future Tense Verbs = %f percent \n Time Words = %f percent \n Sample Size = %f words", overSixLettersPercent, firstPersonSingularPercent, firstPersonPluralPercent, totalFirstPersonPercent, secondPersonPercent, thirdPersonPercent, articlesPercent, semanticCausationPercent, pastTenseVerbsPercent, futureTenseVerbsPercent, semanticTimePercent, totalWords);
+    NSLog(@"\n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@ \n Power# %f", happy, sad, angry, powerRead, truthRead, appDelegate.globalPower);
+    
+    // display words and scores in app
+	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Sadness Score = %f /1 \n Happiness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", sad, happy, angry, powerRead, truthRead]; // score
+
 }
 
 #ifdef kGetNbest

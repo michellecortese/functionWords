@@ -49,28 +49,42 @@
     startPoint.x = 160; startPoint.y = 0.0; endPoint.x = 160; endPoint.y = 568;
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
     
-    /*
-     float powerAmount = appDelegate.globalPower; // amount of points
-     bool truthCurve = appDelegate.globalTruth; // bezier curves on/off
-     */
+    // allocation of truth/power variables
+    float powerAmount = (appDelegate.globalPower)*100; // amount of points
+    bool truthCurve = appDelegate.globalTruth; // bezier curves on/off
     
-    // generate random points
-    CGPoint randomPoint;
-    randomPoint.x = arc4random() % 320;
+    // draw shape
+    if(truthCurve == false){
+        // draw with angles
+    } else {
+        // draw with curves
+    }
     
-    // crystal tests
-    CGContextSetLineWidth(context, 0.75);
-    CGContextSetStrokeColorWithColor(context,[UIColor whiteColor].CGColor);
-    CGContextMoveToPoint(context, randomPoint.x, 200);
-    CGContextAddQuadCurveToPoint(context, 150, 10, 300, 200);
-    CGContextMoveToPoint(context, 100, 400);
-    CGContextAddQuadCurveToPoint(context, 250, 110, 200, 400);
-    CGContextStrokePath(context);
-    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(redraw) userInfo:nil repeats:YES];
 }
-/*
-- (void)timerPing:(NSTimer *)theTimer{ // after # seconds, update display
+
+- (void)redraw // update draw loop
+{
     [self setNeedsDisplay];
+}
+
+
+/*
+ 
+ // generate random points
+ CGPoint randomPoint;
+ randomPoint.x = arc4random() % 320;
+ randomPoint.y = arc4random() % 568;
+ 
+ // crystal tests
+ CGContextSetLineWidth(context, 0.75);
+ CGContextSetStrokeColorWithColor(context,[UIColor whiteColor].CGColor);
+ 
+ CGContextMoveToPoint(context, randomPoint.x, randomPoint.y);
+ CGContextAddQuadCurveToPoint(context, 150, 10, 300, 200);
+ CGContextMoveToPoint(context, 100, 400);
+ CGContextAddQuadCurveToPoint(context, 250, 110, 200, 400);
+ CGContextStrokePath(context);
 
 }*/
 
