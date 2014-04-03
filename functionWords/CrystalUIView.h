@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define  PATTERN_COUNT 3
+
 @interface CrystalUIView : UIView {
 
 }

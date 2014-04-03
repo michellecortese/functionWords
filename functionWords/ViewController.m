@@ -150,7 +150,8 @@ NSString *truthRead = nil;
     [super viewDidLoad];
     [self.openEarsEventsObserver setDelegate:self]; // delegate of OpenEarsObserver class
     LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init]; // language model
-    NSArray *languageArray = [NSArray arrayWithObjects:   @"A",
+    NSArray *languageArray = [NSArray arrayWithObjects:
+                              @"A",
                               @"ACCEPTED",
                               @"ADMITTED",
                               @"AFFECT",
@@ -470,6 +471,14 @@ NSString *truthRead = nil;
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]; // access global variables
     
+    NSString *accuracy = recognitionScore;
+    NSInteger accuracyScore = [accuracy integerValue];
+    
+    // set accuracy bar
+    if (accuracyScore > (-500)){
+    
+    }
+    
     // if user says a category word, add to that category
     NSArray *firstPersonSingularArray = [NSArray arrayWithObjects: @"I", @"ME", @"MINE", @"MY", nil];
     for (NSString *s in firstPersonSingularArray)
@@ -654,16 +663,17 @@ NSString *truthRead = nil;
     }
     
     // drop into global variables
+    appDelegate.globalWordCount = totalWords;
     appDelegate.globalHappy = happy;
     appDelegate.globalSad = sad;
     appDelegate.globalAngry = angry;
-    appDelegate.globalPower = confidence/totalWords;
+    appDelegate.globalPower = power;
     appDelegate.globalTruth = truth;
     
     // print all
     NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
     NSLog(@"\n Words Over Six Characters = %f percent \n First Person Singular Pronouns = %f percent \n First Person Plural Pronouns = %f percent \n Total First Person Pronouns = %f percent \n Second Person Pronouns = %f percent \n Third Person Pronouns = %f percent \n Articles = %f percent \n Causation Words = %f percent \n Past Tense Verbs = %f percent \n Future Tense Verbs = %f percent \n Time Words = %f percent \n Sample Size = %f words", overSixLettersPercent, firstPersonSingularPercent, firstPersonPluralPercent, totalFirstPersonPercent, secondPersonPercent, thirdPersonPercent, articlesPercent, semanticCausationPercent, pastTenseVerbsPercent, futureTenseVerbsPercent, semanticTimePercent, totalWords);
-    NSLog(@"\n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@ \n Power# %f", happy, sad, angry, powerRead, truthRead, appDelegate.globalPower);
+    NSLog(@"\n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@ ", happy, sad, angry, powerRead, truthRead);
     
     // display words and scores in app
 	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
@@ -725,7 +735,7 @@ NSString *truthRead = nil;
 	self.fliteController.duration_stretch = .9; // change speed
 	self.fliteController.target_mean = 1.2; // change pitch
 	self.fliteController.target_stddev = 1.5; // change variance
-    [self.fliteController say:@"Welcome to function words." withVoice:self.slt]; // welcome greeting
+    //[self.fliteController say:@"Welcome to function words." withVoice:self.slt]; // welcome greeting
 	self.fliteController.duration_stretch = 1.0; // reset speed
 	self.fliteController.target_mean = 1.0; // reset pitch
 	self.fliteController.target_stddev = 1.0; // reset variance
@@ -800,10 +810,11 @@ NSString *truthRead = nil;
     powerRead = @"Average";
     self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead];
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]; // access global variables
+    appDelegate.globalWordCount = totalWords;
     appDelegate.globalHappy = happy;
     appDelegate.globalSad = sad;
     appDelegate.globalAngry = angry;
-    appDelegate.globalPower = confidence;
+    appDelegate.globalPower = power;
     appDelegate.globalTruth = truth;
 }
 

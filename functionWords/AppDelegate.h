@@ -9,18 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
+    CGFloat globalWordCount;
     CGFloat happy;
     CGFloat sad;
     CGFloat angry;
-    CGFloat power;
-    BOOL truth;
+    bool power;
+    bool truth;
 }
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) CGFloat globalWordCount;
 @property (nonatomic) CGFloat globalHappy;
 @property (nonatomic) CGFloat globalSad;
 @property (nonatomic) CGFloat globalAngry;
-@property (nonatomic) CGFloat globalPower;
-@property (nonatomic) BOOL globalTruth;
+@property (nonatomic) bool globalPower;
+@property (nonatomic) bool globalTruth;
 
 @end
