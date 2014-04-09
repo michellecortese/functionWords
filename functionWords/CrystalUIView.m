@@ -27,9 +27,6 @@
     float sadAlpha = appDelegate.globalSad;
     float happyAlpha = appDelegate.globalHappy;
     float angryAlpha = appDelegate.globalAngry;
-    //float wordCount = appDelegate.globalWordCount;
-    bool powerRotate = appDelegate.globalPower;
-    bool truthFill = appDelegate.globalTruth;
     
     // rgb gradient colors
     UIColor *sadColor1 = [UIColor colorWithRed:0.32 green:0.93 blue:0.78 alpha:sadAlpha];
@@ -45,6 +42,8 @@
     [self drawBackground:rect gradColSad:sadColors gradColHap:happyColors gradColAng:angryColors inContext:context];
     
     // draw truth as fill and power as rotation
+    bool powerRotate = appDelegate.globalPower; bool truthFill = appDelegate.globalTruth;
+    
     if(truthFill == true){
         CGContextSetFillColorWithColor(context,[UIColor whiteColor].CGColor);
         if(powerRotate == true){

@@ -24,6 +24,11 @@
 		7E9416EA189894F900244CCE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9416CC189894F900244CCE /* UIKit.framework */; };
 		7E9416F2189894F900244CCE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E9416F0189894F900244CCE /* InfoPlist.strings */; };
 		7E9416F4189894F900244CCE /* functionWordsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9416F3189894F900244CCE /* functionWordsTests.m */; };
+		7EA8B93618F4502D0003DF8E /* LogUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA8B93518F4502D0003DF8E /* LogUIView.m */; };
+		7EA8B94018F45D840003DF8E /* graphic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA8B93D18F45D840003DF8E /* graphic_button.png */; };
+		7EA8B94118F45D840003DF8E /* log_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA8B93E18F45D840003DF8E /* log_button.png */; };
+		7EA8B94218F45D840003DF8E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA8B93F18F45D840003DF8E /* logo.png */; };
+		7EA8B94418F4BEE50003DF8E /* logo_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA8B94318F4BEE50003DF8E /* logo_pressed.png */; };
 		7EE3109E18A9E9A700DEE37F /* AcousticModelEnglish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EE3109A18A9E9A700DEE37F /* AcousticModelEnglish.bundle */; };
 		7EE3109F18A9E9A700DEE37F /* AcousticModelSpanish.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7EE3109B18A9E9A700DEE37F /* AcousticModelSpanish.bundle */; };
 		7EE310A018A9E9A700DEE37F /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE3109C18A9E9A700DEE37F /* OpenEars.framework */; };
@@ -67,6 +72,12 @@
 		7E9416EF189894F900244CCE /* functionWordsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "functionWordsTests-Info.plist"; sourceTree = "<group>"; };
 		7E9416F1189894F900244CCE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E9416F3189894F900244CCE /* functionWordsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = functionWordsTests.m; sourceTree = "<group>"; };
+		7EA8B93418F4502D0003DF8E /* LogUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogUIView.h; sourceTree = "<group>"; };
+		7EA8B93518F4502D0003DF8E /* LogUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogUIView.m; sourceTree = "<group>"; };
+		7EA8B93D18F45D840003DF8E /* graphic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = graphic_button.png; path = ../graphic_button.png; sourceTree = "<group>"; };
+		7EA8B93E18F45D840003DF8E /* log_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = log_button.png; path = ../log_button.png; sourceTree = "<group>"; };
+		7EA8B93F18F45D840003DF8E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../logo.png; sourceTree = "<group>"; };
+		7EA8B94318F4BEE50003DF8E /* logo_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_pressed.png; sourceTree = "<group>"; };
 		7EE3109A18A9E9A700DEE37F /* AcousticModelEnglish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelEnglish.bundle; sourceTree = "<group>"; };
 		7EE3109B18A9E9A700DEE37F /* AcousticModelSpanish.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AcousticModelSpanish.bundle; sourceTree = "<group>"; };
 		7EE3109C18A9E9A700DEE37F /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
@@ -139,6 +150,8 @@
 		7E9416CE189894F900244CCE /* functionWords */ = {
 			isa = PBXGroup;
 			children = (
+				7EA8B93418F4502D0003DF8E /* LogUIView.h */,
+				7EA8B93518F4502D0003DF8E /* LogUIView.m */,
 				7E62820418D921B70073BAAA /* CrystalViewController.h */,
 				7E62820518D921B70073BAAA /* CrystalViewController.m */,
 				7E62820618D921B70073BAAA /* CrystalViewController.xib */,
@@ -158,6 +171,10 @@
 		7E9416CF189894F900244CCE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7EA8B93D18F45D840003DF8E /* graphic_button.png */,
+				7EA8B93E18F45D840003DF8E /* log_button.png */,
+				7EA8B94318F4BEE50003DF8E /* logo_pressed.png */,
+				7EA8B93F18F45D840003DF8E /* logo.png */,
 				7E9416D0189894F900244CCE /* functionWords-Info.plist */,
 				7E9416D1189894F900244CCE /* InfoPlist.strings */,
 				7E9416D4189894F900244CCE /* main.m */,
@@ -275,10 +292,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9416E1189894F900244CCE /* Images.xcassets in Resources */,
+				7EA8B94418F4BEE50003DF8E /* logo_pressed.png in Resources */,
+				7EA8B94018F45D840003DF8E /* graphic_button.png in Resources */,
+				7EA8B94218F45D840003DF8E /* logo.png in Resources */,
 				7EE3109F18A9E9A700DEE37F /* AcousticModelSpanish.bundle in Resources */,
 				7EE3109E18A9E9A700DEE37F /* AcousticModelEnglish.bundle in Resources */,
 				7E62820818D921B70073BAAA /* CrystalViewController.xib in Resources */,
 				7E9416D3189894F900244CCE /* InfoPlist.strings in Resources */,
+				7EA8B94118F45D840003DF8E /* log_button.png in Resources */,
 				7E9416DC189894F900244CCE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E3A7D8718D9FD8F0075CDAA /* CrystalUIView.m in Sources */,
+				7EA8B93618F4502D0003DF8E /* LogUIView.m in Sources */,
 				7E9416DF189894F900244CCE /* ViewController.m in Sources */,
 				7E62820718D921B70073BAAA /* CrystalViewController.m in Sources */,
 				7E9416D9189894F900244CCE /* AppDelegate.m in Sources */,

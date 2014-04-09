@@ -681,6 +681,7 @@ NSString *truthRead = nil;
 
 }
 
+
 #ifdef kGetNbest
 - (void) pocketsphinxDidReceiveNBestHypothesisArray:(NSArray *)hypothesisArray { // pocketsphinx has an n-best hypothesis dictionary
     NSLog(@"hypothesisArray is %@",hypothesisArray);
@@ -689,35 +690,35 @@ NSString *truthRead = nil;
 // informs that there was an interruption
 - (void) audioSessionInterruptionDidBegin {
 	NSLog(@"Interruption began.");
-	self.statusTextView.text = @"Interruption began."; // display in app
+	self.statusTextView.text = @"I N T E R R U P T I O N  B E G A N"; // display in app
 	[self.pocketsphinxController stopListening]; // stop listening
 }
 
 // informs that the interruption ended
 - (void) audioSessionInterruptionDidEnd {
 	NSLog(@"Interruption ended.");
-	self.statusTextView.text = @"Interruption ended."; // display in app
+	self.statusTextView.text = @"I N T E R R U P T I O N  E N D E D"; // display in app
     [self startListening]; // restart
 }
 
 // informs that audio input became unavailable
 - (void) audioInputDidBecomeUnavailable {
 	NSLog(@"Audio input has become unavailable");
-	self.statusTextView.text = @"Audio input has become unavailable"; // display in app
+	self.statusTextView.text = @"A U D I O  I N P U T  H A S  B E C O M E  U N A V A I L A B L E"; // display in app
 	[self.pocketsphinxController stopListening]; // stop listening
 }
 
 // informs that audio input became available again
 - (void) audioInputDidBecomeAvailable {
 	NSLog(@"Audio input is available");
-	self.statusTextView.text = @"Audio input is available"; // display in app
+	self.statusTextView.text = @"A U D I O  I N P U T  I S  A V A I L A B L E"; // display in app
     [self startListening]; // restart
 }
 
 // informs change of route (if bluetooth necklace disconnects)
 - (void) audioRouteDidChangeToRoute:(NSString *)newRoute {
 	NSLog(@"Audio source change. You are now using %@", newRoute);
-	self.statusTextView.text = [NSString stringWithFormat:@"Audio source change. You are now using %@",newRoute]; // display in app
+	self.statusTextView.text = [NSString stringWithFormat:@"A U D I O  S O U R C E  C H A N G E — Y O U  A R E  N O W  U S I N G %@",newRoute]; // display in app
 	[self.pocketsphinxController stopListening];
     [self startListening];  // shut down and restart listening loop on the new route
 }
@@ -725,13 +726,13 @@ NSString *truthRead = nil;
 // calibration is on
 - (void) pocketsphinxDidStartCalibration {
 	NSLog(@"Pocketsphinx calibration has started.");
-	self.statusTextView.text = @"Calibration is on."; // display in app
+	self.statusTextView.text = @"C A L I B R A T I O N  I S  O N"; // display in app
 }
 
 // calibration complete
 - (void) pocketsphinxDidCompleteCalibration {
 	NSLog(@"Pocketsphinx calibration is complete.");
-	self.statusTextView.text = @"Calibration is complete."; // display in app
+	self.statusTextView.text = @"C A L I B R A T I O N  I S  C O M P L E T E"; // display in app
 	self.fliteController.duration_stretch = .9; // change speed
 	self.fliteController.target_mean = 1.2; // change pitch
 	self.fliteController.target_stddev = 1.5; // change variance
@@ -744,31 +745,31 @@ NSString *truthRead = nil;
 // informs that the listening loop began
 - (void) pocketsphinxRecognitionLoopDidStart {
 	NSLog(@"Pocketsphinx is starting up.");
-	self.statusTextView.text = @"Listening."; // display in app
+	self.statusTextView.text = @"L I S T E N I N G"; // display in app
 }
 
 // informs that we are now looking for words
 - (void) pocketsphinxDidStartListening {
 	NSLog(@"Listening.");
-	self.statusTextView.text = @"Listening..."; // display in app
+	self.statusTextView.text = @"L I S T E N I N G"; // display in app
 }
 
 // informs that we are now processing speech
 - (void) pocketsphinxDidDetectSpeech {
 	NSLog(@"Speech detected.");
-	self.statusTextView.text = @"Speech detected."; // display in app
+	self.statusTextView.text = @"S P E E C H  D E T E C T E D"; // display in app
 }
 
 // informs that we stopped listening
 - (void) pocketsphinxDidStopListening {
 	NSLog(@"Stopped listening.");
-	self.statusTextView.text = @"No longer listening."; // display in app
+	self.statusTextView.text = @"N O  L O N G E R  L I S T E N I N G"; // display in app
 }
 
 // informs that something went wrong with the recognition loop startup
 - (void) pocketSphinxContinuousSetupDidFail {
 	NSLog(@"Setting up the continuous recognition loop has failed for some reason, please turn on [OpenEarsLogging startOpenEarsLogging] in OpenEarsConfig.h to learn more.");
-	self.statusTextView.text = @"Not possible to start recognition loop."; // display in app
+	self.statusTextView.text = @"N O T  P O S S I B L E  T O  S T A R T  R E C O G N I T I O N  L O O P"; // display in app
 }
 
 - (void) shutDown {
