@@ -45,19 +45,25 @@
     bool powerRotate = appDelegate.globalPower; bool truthFill = appDelegate.globalTruth;
     
     if(truthFill == true){
+        CGContextSetAlpha(context, 1.0);
         CGContextSetFillColorWithColor(context,[UIColor whiteColor].CGColor);
         if(powerRotate == true){
             [self drawTriangleUp:context];
         } else if(powerRotate == false) {
             [self drawTriangleDown:context];
+        }  else {
+            [self drawTriangleMid:context];
         } CGContextFillPath(context);
     } else if (truthFill == false){
+        CGContextSetAlpha(context, 1.0);
         CGContextSetLineWidth(context, 2.0);
         CGContextSetStrokeColorWithColor(context,[UIColor whiteColor].CGColor);
         if(powerRotate == true){
             [self drawTriangleUp:context];
         } else if(powerRotate == false) {
             [self drawTriangleDown:context];
+        } else {
+            [self drawTriangleMid:context];
         } CGContextStrokePath(context);
     }
     
@@ -72,16 +78,23 @@
 
 - (void)drawTriangleUp:(CGContextRef)context
 {
-    CGContextSetAlpha(context, 1.0);
     CGContextMoveToPoint(context, 168, 135);
     CGContextAddLineToPoint(context, 320, self.center.y);
     CGContextAddLineToPoint(context, 0, self.center.y);
     CGContextAddLineToPoint(context, 168, 135);
 }
 
+- (void)drawTriangleMid:(CGContextRef)context
+{
+    CGContextMoveToPoint(context, 320, self.center.y);
+    CGContextAddLineToPoint(context, 320, self.center.y+5);
+    CGContextAddLineToPoint(context, 0, self.center.y+5);
+    CGContextAddLineToPoint(context, 0, self.center.y);
+    CGContextAddLineToPoint(context, 320, self.center.y);
+}
+
 - (void)drawTriangleDown:(CGContextRef)context
 {
-    CGContextSetAlpha(context, 1.0);
     CGContextMoveToPoint(context, 152, 433);
     CGContextAddLineToPoint(context, 320, self.center.y);
     CGContextAddLineToPoint(context, 0, self.center.y);

@@ -474,75 +474,81 @@ NSString *truthRead = nil;
     NSString *accuracy = recognitionScore;
     NSInteger accuracyScore = [accuracy integerValue];
     
-    // set accuracy bar
-    if (accuracyScore > (-500)){
-    
-    }
-    
-    // if user says a category word, add to that category
-    NSArray *firstPersonSingularArray = [NSArray arrayWithObjects: @"I", @"ME", @"MINE", @"MY", nil];
-    for (NSString *s in firstPersonSingularArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            firstPersonSingular++;
+    // if the hypothesis is ranked high, scan the hypothesis for word categories, commit words to categories
+    if (accuracyScore > (-18000)){
+        
+        // if user says a category word, add to that category
+        NSArray *firstPersonSingularArray = [NSArray arrayWithObjects: @"I", @"ME", @"MINE", @"MY", nil];
+        for (NSString *s in firstPersonSingularArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                firstPersonSingular++;
+            }
+        }
+        NSArray *firstPersonPluralArray = [NSArray arrayWithObjects: @"LETS", @"OUR", @"US", @"WE", nil];
+        for (NSString *s in firstPersonPluralArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                firstPersonPlural++;
+            }
+        }
+        NSArray *secondPersonArray = [NSArray arrayWithObjects: @"THOU", @"Y'ALL", @"YA", @"YOU", @"YOUR", nil];
+        for (NSString *s in secondPersonArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                secondPerson++;
+            }
+        }
+        NSArray *thirdPersonArray = [NSArray arrayWithObjects: @"HE", @"HER", @"HIM", @"HIS", @"SHE", @"THEIR", @"THEM", @"THEY", nil];
+        for (NSString *s in thirdPersonArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                thirdPerson++;
+            }
+        }
+        NSArray *articlesArray = [NSArray arrayWithObjects: @"A", @"AN", @"THE", nil];
+        for (NSString *s in articlesArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                articles++;
+            }
+        }
+        NSArray *semanticCausationArray = [NSArray arrayWithObjects: @"AFFECT", @"ASSUME", @"BASIS", @"BECAUSE", @"CAUSE", @"CONSEQUENCE", @"DEPEND", @"EFFECT", @"FOUND", @"FOUNDATION", @"HENCE", @"HOW", @"IMPLICIT", @"INFER", @"INFLUENCE", @"MOTIVATE", @"MOTIVE", @"ORIGIN", @"OUTCOME", @"PRODUCE", @"PRODUCT", @"PURPOSE", @"RATIONAL", @"REACT", @"REASON", @"RESULT", @"ROOT", @"SINCE", @"SOURCE", @"STIMULI", @"THEREFORE", @"THUS", @"WHY", nil];
+        for (NSString *s in semanticCausationArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                semanticCausation++;
+            }
+        }
+        NSArray *semanticTimeArray = [NSArray arrayWithObjects: @"AFTER", @"AGAIN", @"AGO", @"ALREADY", @"ALWAYS", @"ANNUAL", @"ANYTIME", @"APRIL", @"AUGUST", @"AUTUMN", @"BEFORE", @"BRIEF", @"CLOCK", @"DAY", @"DECADE", @"DECEMBER", @"DURING", @"END", @"ERA", @"ETERNITY", @"EVENING", @"FEBRUARY", @"FOREVER", @"FRIDAY", @"FUTURE", @"GENERATION", @"HISTORY", @"HOUR", @"IMMEDIATE", @"IMMORTAL", @"INSTANCE", @"JANUARY", @"JULY", @"JUNE", @"LAST", @"LATE", @"MARCH", @"MEANTIME", @"MEANWHILE", @"MINUTE", @"MOMENT", @"MONDAY", @"MONTH", @"MORNING", @"NEVER", @"NEXT", @"NIGHT", @"NOON", @"NOVEMBER", @"NOW", @"OCCASIONAL", @"OCTOBER", @"OLD", @"ONCE", @"ORIGIN", @"PAST", @"PERIOD", @"PRESENT", @"SATURDAY", @"SEMESTER", @"SEPTEMBER", @"SOMETIME", @"SOON", @"SPRING", @"SUDDEN", @"SUMMER", @"SUNDAY", @"TEMPORARY", @"THEN", @"THURSDAY", @"TILL", @"TIME", @"TODAY", @"TOMORROW", @"TONIGHT", @"TUESDAY", @"UNTIL", @"WEDNESDAY", @"WEEK", @"WHEN", @"WHILE", @"WINTER", @"YEAR", @"YESTERDAY", @"YOUNG", nil];
+        for (NSString *s in semanticTimeArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                semanticTime++;
+            }
+        }
+        NSArray *pastTenseVerbsArray = [NSArray arrayWithObjects: @"ACCEPTED", @"ADMITTED", @"AFFECTED", @"APPEARED", @"ASKED", @"ATE", @"BECAME", @"BEEN", @"BEGAN", @"BELIEVED", @"BOUGHT", @"BROKEN", @"BROUGHT", @"CALLED", @"CAME", @"CARED", @"CARRIED", @"CHANGED", @"CHEERED", @"CONFIDED", @"CRIED", @"DEPENDED", @"DESCRIBED", @"DID", @"DIED", @"DISLIKED", @"DONE", @"DRANK", @"DRIVEN", @"DROVE", @"DRUNK", @"EATEN", @"ENDED", @"ENTERED", @"EXPLAINED", @"EXPRESSED", @"FED", @"FELT", @"FLED", @"FLEW", @"FOLLOWED", @"FOUGHT", @"FOUND", @"GAVE", @"GIVEN", @"GONE", @"GOT", @"GOTTEN", @"GUESSED", @"HAD", @"HAPPENED", @"HATED", @"HEARD", @"HELD", @"HELPED", @"HOPED", @"INFERRED", @"KEPT", @"KNEW", @"LEFT", @"LIED", @"LIKED", @"LISTENED", @"LIVED", @"LOOKED", @"LOST", @"LOVED", @"MADE", @"MEANT", @"MET", @"MISSED", @"MOVED", @"NEEDED", @"OWED", @"PACKED", @"PAID", @"PAST", @"PLAYED", @"PROTESTED", @"QUESTIONNED", @"RAN", @"REQUIRED", @"RESOLVED", @"RUBBED", @"RUSHED", @"SAID", @"SAT", @"SAW", @"SEEMED", @"SEEN", @"SENSED", @"SHARED", @"SHOPPED", @"SHOWED", @"SMOKED", @"SOLD", @"SPENT", @"SPOKE", @"STARTED", @"STAYED", @"STOOD", @"STOPPED", @"STUCK", @"STUDIED", @"STUNNED", @"SUCKED", @"SUFFERED", @"SUPPORTED", @"SUPPOSED", @"SURROUNDED", @"TAKEN", @"TALKED", @"TAUGHT", @"TENDED", @"THANKED", @"THOUGHT", @"THREW", @"TOLD", @"TOOK", @"TRIED", @"TURNED", @"UNDERSTOOD", @"USED", @"VIEWED", @"WAITED", @"WALKED", @"WANTED", @"WAS", @"WENT", @"WERE", @"WISHED", @"WOKE", @"WON", @"WONDERED", @"WORE", @"WORKED", @"WRITTEN", @"WROTE", @"YESTERDAY", nil];
+        for (NSString *s in pastTenseVerbsArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                pastTenseVerbs++;
+            }
+        }
+        NSArray *futureTenseVerbsArray = [NSArray arrayWithObjects: @"HE'LL", @"I'LL", @"IT'LL", @"MAY", @"MIGHT", @"SHALL", @"SHE'LL", @"THEY'LL", @"WE'LL", @"WILL", @"WON'T", @"YOU'LL", nil];
+        for (NSString *s in futureTenseVerbsArray)
+        {
+            if ([hypothesis rangeOfString:s].location != NSNotFound) {
+                futureTenseVerbs++;
+            }
+        }
+        NSArray *words = [hypothesis componentsSeparatedByString: @" "];
+         for (NSString * word in words ){
+            if( [word length] > 6 ) {
+                overSixLetters++;
+            }
         }
     }
-    NSArray *firstPersonPluralArray = [NSArray arrayWithObjects: @"LETS", @"OUR", @"US", @"WE", nil];
-    for (NSString *s in firstPersonPluralArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            firstPersonPlural++;
-        }
-    }
-    NSArray *secondPersonArray = [NSArray arrayWithObjects: @"THOU", @"Y'ALL", @"YA", @"YOU", @"YOUR", nil];
-    for (NSString *s in secondPersonArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            secondPerson++;
-        }
-    }
-    NSArray *thirdPersonArray = [NSArray arrayWithObjects: @"HE", @"HER", @"HIM", @"HIS", @"SHE", @"THEIR", @"THEM", @"THEY", nil];
-    for (NSString *s in thirdPersonArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            thirdPerson++;
-        }
-    }
-    NSArray *articlesArray = [NSArray arrayWithObjects: @"A", @"AN", @"THE", nil];
-    for (NSString *s in articlesArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            articles++;
-        }
-    }
-    NSArray *semanticCausationArray = [NSArray arrayWithObjects: @"AFFECT", @"ASSUME", @"BASIS", @"BECAUSE", @"CAUSE", @"CONSEQUENCE", @"DEPEND", @"EFFECT", @"FOUND", @"FOUNDATION", @"HENCE", @"HOW", @"IMPLICIT", @"INFER", @"INFLUENCE", @"MOTIVATE", @"MOTIVE", @"ORIGIN", @"OUTCOME", @"PRODUCE", @"PRODUCT", @"PURPOSE", @"RATIONAL", @"REACT", @"REASON", @"RESULT", @"ROOT", @"SINCE", @"SOURCE", @"STIMULI", @"THEREFORE", @"THUS", @"WHY", nil];
-    for (NSString *s in semanticCausationArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            semanticCausation++;
-        }
-    }
-    NSArray *semanticTimeArray = [NSArray arrayWithObjects: @"AFTER", @"AGAIN", @"AGO", @"ALREADY", @"ALWAYS", @"ANNUAL", @"ANYTIME", @"APRIL", @"AUGUST", @"AUTUMN", @"BEFORE", @"BRIEF", @"CLOCK", @"DAY", @"DECADE", @"DECEMBER", @"DURING", @"END", @"ERA", @"ETERNITY", @"EVENING", @"FEBRUARY", @"FOREVER", @"FRIDAY", @"FUTURE", @"GENERATION", @"HISTORY", @"HOUR", @"IMMEDIATE", @"IMMORTAL", @"INSTANCE", @"JANUARY", @"JULY", @"JUNE", @"LAST", @"LATE", @"MARCH", @"MEANTIME", @"MEANWHILE", @"MINUTE", @"MOMENT", @"MONDAY", @"MONTH", @"MORNING", @"NEVER", @"NEXT", @"NIGHT", @"NOON", @"NOVEMBER", @"NOW", @"OCCASIONAL", @"OCTOBER", @"OLD", @"ONCE", @"ORIGIN", @"PAST", @"PERIOD", @"PRESENT", @"SATURDAY", @"SEMESTER", @"SEPTEMBER", @"SOMETIME", @"SOON", @"SPRING", @"SUDDEN", @"SUMMER", @"SUNDAY", @"TEMPORARY", @"THEN", @"THURSDAY", @"TILL", @"TIME", @"TODAY", @"TOMORROW", @"TONIGHT", @"TUESDAY", @"UNTIL", @"WEDNESDAY", @"WEEK", @"WHEN", @"WHILE", @"WINTER", @"YEAR", @"YESTERDAY", @"YOUNG", nil];
-    for (NSString *s in semanticTimeArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            semanticTime++;
-        }
-    }
-    NSArray *pastTenseVerbsArray = [NSArray arrayWithObjects: @"ACCEPTED", @"ADMITTED", @"AFFECTED", @"APPEARED", @"ASKED", @"ATE", @"BECAME", @"BEEN", @"BEGAN", @"BELIEVED", @"BOUGHT", @"BROKEN", @"BROUGHT", @"CALLED", @"CAME", @"CARED", @"CARRIED", @"CHANGED", @"CHEERED", @"CONFIDED", @"CRIED", @"DEPENDED", @"DESCRIBED", @"DID", @"DIED", @"DISLIKED", @"DONE", @"DRANK", @"DRIVEN", @"DROVE", @"DRUNK", @"EATEN", @"ENDED", @"ENTERED", @"EXPLAINED", @"EXPRESSED", @"FED", @"FELT", @"FLED", @"FLEW", @"FOLLOWED", @"FOUGHT", @"FOUND", @"GAVE", @"GIVEN", @"GONE", @"GOT", @"GOTTEN", @"GUESSED", @"HAD", @"HAPPENED", @"HATED", @"HEARD", @"HELD", @"HELPED", @"HOPED", @"INFERRED", @"KEPT", @"KNEW", @"LEFT", @"LIED", @"LIKED", @"LISTENED", @"LIVED", @"LOOKED", @"LOST", @"LOVED", @"MADE", @"MEANT", @"MET", @"MISSED", @"MOVED", @"NEEDED", @"OWED", @"PACKED", @"PAID", @"PAST", @"PLAYED", @"PROTESTED", @"QUESTIONNED", @"RAN", @"REQUIRED", @"RESOLVED", @"RUBBED", @"RUSHED", @"SAID", @"SAT", @"SAW", @"SEEMED", @"SEEN", @"SENSED", @"SHARED", @"SHOPPED", @"SHOWED", @"SMOKED", @"SOLD", @"SPENT", @"SPOKE", @"STARTED", @"STAYED", @"STOOD", @"STOPPED", @"STUCK", @"STUDIED", @"STUNNED", @"SUCKED", @"SUFFERED", @"SUPPORTED", @"SUPPOSED", @"SURROUNDED", @"TAKEN", @"TALKED", @"TAUGHT", @"TENDED", @"THANKED", @"THOUGHT", @"THREW", @"TOLD", @"TOOK", @"TRIED", @"TURNED", @"UNDERSTOOD", @"USED", @"VIEWED", @"WAITED", @"WALKED", @"WANTED", @"WAS", @"WENT", @"WERE", @"WISHED", @"WOKE", @"WON", @"WONDERED", @"WORE", @"WORKED", @"WRITTEN", @"WROTE", @"YESTERDAY", nil];
-    for (NSString *s in pastTenseVerbsArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            pastTenseVerbs++;
-        }
-    }
-    NSArray *futureTenseVerbsArray = [NSArray arrayWithObjects: @"HE'LL", @"I'LL", @"IT'LL", @"MAY", @"MIGHT", @"SHALL", @"SHE'LL", @"THEY'LL", @"WE'LL", @"WILL", @"WON'T", @"YOU'LL", nil];
-    for (NSString *s in futureTenseVerbsArray)
-    {
-        if ([hypothesis rangeOfString:s].location != NSNotFound) {
-            futureTenseVerbs++;
-        }
-    }
+
     
     // tallies
     totalFirstPerson = firstPersonSingular + firstPersonPlural;
@@ -564,67 +570,43 @@ NSString *truthRead = nil;
     // outputs
     // happy
     if (pastTenseVerbsPercent < 11 && happy < 0.96){
-        happy = happy+0.05;
-    } else if (pastTenseVerbsPercent > 11 && happy > 0.04){
-        happy = happy-0.05;
-    }
+        happy = happy+0.01;
+    } else if (happy > 0) { happy = happy-0.005;}
     if (futureTenseVerbsPercent < 2 && happy < 0.96){
-        happy = happy+0.05;
-    } else if (futureTenseVerbsPercent > 2 && happy > 0.04){
-        happy = happy-0.05;
-    }
+        happy = happy+0.01;
+    } else if (happy > 0) { happy = happy-0.005;}
     if (firstPersonPluralPercent > 2 && happy < 0.96){
-        happy = happy+0.05;
-    } else if (firstPersonPluralPercent < 2 && happy > 0.04){
-        happy = happy-0.05;
-    }
+        happy = happy+0.01;
+    } else if (happy > 0) { happy = happy-0.005;}
     if (semanticTimePercent > 0.04 && happy < 0.96){
-        happy = happy+0.05;
-    } else if (semanticTimePercent < 0.04 && happy > 0.04){
-        happy = happy-0.05;
-    }
+        happy = happy+0.01;
+    } else if (happy > 0) { happy = happy-0.005;}
     // sad
     if (firstPersonSingularPercent > 16 && sad < 0.96){
-        sad = sad+0.05;
-    } else if (firstPersonSingularPercent < 16 && sad > 0.04){
-        sad = sad-0.05;
-    }
+        sad = sad+0.01;
+    } else if (sad > 0) { sad = sad-0.005;}
     if (pastTenseVerbsPercent > 11 && sad < 0.96){
-        sad = sad+0.05;
-    } else if (pastTenseVerbsPercent < 11 && sad > 0.04){
-        sad = sad-0.05;
-    }
+        sad = sad+0.01;
+    } else if (sad > 0) { sad = sad-0.005;}
     if (futureTenseVerbsPercent > 2 && sad < 0.96){
-        sad = sad+0.05;
-    } else if (futureTenseVerbsPercent < 2 && sad > 0.04){
-        sad = sad-0.05;
-    }
+        sad = sad+0.01;
+    } else if (sad > 0) { sad = sad-0.005;}
     if (semanticCausationPercent > 1 && sad < 0.96){
-        sad = sad+0.05;
-    } else if (semanticCausationPercent < 1 && sad > 0.04){
-        sad = sad-0.05;
-    }
+        sad = sad+0.01;
+    } else if (sad > 0) { sad = sad-0.005;}
     // angry
     if (secondPersonPercent > 1 && angry < 0.96){
-        angry = angry+0.05;
-    } else if (secondPersonPercent < 1 && angry > 0.04){
-        angry = angry-0.05;
-    }
+        angry = angry+0.01;
+    } else if (angry > 0) { angry = angry-0.005;}
     if (thirdPersonPercent > 0.05 && angry < 0.96){
-        angry = angry+0.05;
-    } else if (thirdPersonPercent < 0.05 && angry > 0.04){
-        angry = angry-0.05;
-    }
+        angry = angry+0.01;
+    } else if (angry > 0) { angry = angry-0.005;}
     if (pastTenseVerbsPercent < 11 && angry < 0.96){
-        angry = angry+0.05;
-    } else if (pastTenseVerbsPercent > 11 && angry > 0.04){
-        angry = angry-0.05;
-    }
+        angry = angry+0.01;
+    } else if (angry > 0) { angry = angry-0.005;}
     if (semanticCausationPercent > 1 && angry < 0.96){
-        angry = angry+0.05;
-    } else if (semanticCausationPercent < 1 && angry > 0.04){
-        angry = angry-0.05;
-    }
+        angry = angry+0.01;
+    } else if (angry > 0) { angry = angry-0.005;}
     // confidence
     if (firstPersonPluralPercent > 2){confidence++;}
     if (overSixLettersPercent > 25){confidence++;}
@@ -636,12 +618,12 @@ NSString *truthRead = nil;
     // confidence bool
     if (confidence > lackConfidence){
         power = true;
-        powerRead = @"Confident";
+        powerRead = @"high";
     } else if (honesty < disHonesty) {
         truth = false;
-        powerRead = @"Under Confident";
+        powerRead = @"low";
     } else {
-        powerRead = @"Average";
+        powerRead = @"average";
     }
     // honesty
     if (overSixLettersPercent > 25){honesty++;}
@@ -654,12 +636,13 @@ NSString *truthRead = nil;
     // honesty bool
     if (honesty > disHonesty){
         truth = true;
-        truthRead = @"Honest";
+        truthRead = @"honest";
     } else if (honesty < disHonesty) {
         truth = false;
-        truthRead = @"Dishonest";
+        truthRead = @"dishonest";
     } else {
-        truthRead = @"Average";
+        truth = true;
+        truthRead = @"average";
     }
     
     // drop into global variables
@@ -676,9 +659,8 @@ NSString *truthRead = nil;
     NSLog(@"\n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@ ", happy, sad, angry, powerRead, truthRead);
     
     // display words and scores in app
-	self.heardTextView.text = [NSString stringWithFormat:@"Heard: \"%@\"", hypothesis]; // words
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Sadness Score = %f /1 \n Happiness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", sad, happy, angry, powerRead, truthRead]; // score
-
+	self.heardTextView.text = [NSString stringWithFormat:@"heard: \"%@\"", hypothesis]; // words
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"%f \n%f \n%f \n%@ \n%@", sad, happy, angry, powerRead, truthRead]; // score
 }
 
 
@@ -690,35 +672,35 @@ NSString *truthRead = nil;
 // informs that there was an interruption
 - (void) audioSessionInterruptionDidBegin {
 	NSLog(@"Interruption began.");
-	self.statusTextView.text = @"I N T E R R U P T I O N  B E G A N"; // display in app
+	self.statusTextView.text = @"I N T E R R U P T I O N"; // display in app
 	[self.pocketsphinxController stopListening]; // stop listening
 }
 
 // informs that the interruption ended
 - (void) audioSessionInterruptionDidEnd {
 	NSLog(@"Interruption ended.");
-	self.statusTextView.text = @"I N T E R R U P T I O N  E N D E D"; // display in app
+	self.statusTextView.text = @"I N T E R R U P T I O N  O V E R"; // display in app
     [self startListening]; // restart
 }
 
 // informs that audio input became unavailable
 - (void) audioInputDidBecomeUnavailable {
 	NSLog(@"Audio input has become unavailable");
-	self.statusTextView.text = @"A U D I O  I N P U T  H A S  B E C O M E  U N A V A I L A B L E"; // display in app
+	self.statusTextView.text = @"A U D I O  I N P U T  U N A V A I L A B L E"; // display in app
 	[self.pocketsphinxController stopListening]; // stop listening
 }
 
 // informs that audio input became available again
 - (void) audioInputDidBecomeAvailable {
 	NSLog(@"Audio input is available");
-	self.statusTextView.text = @"A U D I O  I N P U T  I S  A V A I L A B L E"; // display in app
+	self.statusTextView.text = @"A U D I O  I N P U T  A V A I L A B L E"; // display in app
     [self startListening]; // restart
 }
 
 // informs change of route (if bluetooth necklace disconnects)
 - (void) audioRouteDidChangeToRoute:(NSString *)newRoute {
 	NSLog(@"Audio source change. You are now using %@", newRoute);
-	self.statusTextView.text = [NSString stringWithFormat:@"A U D I O  S O U R C E  C H A N G E — Y O U  A R E  N O W  U S I N G %@",newRoute]; // display in app
+	self.statusTextView.text = [NSString stringWithFormat:@"A U D I O  S O U R C E  C H A N G E"]; // display in app
 	[self.pocketsphinxController stopListening];
     [self startListening];  // shut down and restart listening loop on the new route
 }
@@ -732,14 +714,7 @@ NSString *truthRead = nil;
 // calibration complete
 - (void) pocketsphinxDidCompleteCalibration {
 	NSLog(@"Pocketsphinx calibration is complete.");
-	self.statusTextView.text = @"C A L I B R A T I O N  I S  C O M P L E T E"; // display in app
-	self.fliteController.duration_stretch = .9; // change speed
-	self.fliteController.target_mean = 1.2; // change pitch
-	self.fliteController.target_stddev = 1.5; // change variance
-    //[self.fliteController say:@"Welcome to function words." withVoice:self.slt]; // welcome greeting
-	self.fliteController.duration_stretch = 1.0; // reset speed
-	self.fliteController.target_mean = 1.0; // reset pitch
-	self.fliteController.target_stddev = 1.0; // reset variance
+	self.statusTextView.text = @"C A L I B R A T I O N  C O M P L E T E"; // display in app
 }
 
 // informs that the listening loop began
@@ -769,7 +744,7 @@ NSString *truthRead = nil;
 // informs that something went wrong with the recognition loop startup
 - (void) pocketSphinxContinuousSetupDidFail {
 	NSLog(@"Setting up the continuous recognition loop has failed for some reason, please turn on [OpenEarsLogging startOpenEarsLogging] in OpenEarsConfig.h to learn more.");
-	self.statusTextView.text = @"N O T  P O S S I B L E  T O  S T A R T  R E C O G N I T I O N  L O O P"; // display in app
+	self.statusTextView.text = @"R E C O G N I T I O N  L O O P  I S  O F F"; // display in app
 }
 
 - (void) shutDown {
@@ -785,7 +760,7 @@ NSString *truthRead = nil;
 #pragma mark -
 #pragma mark UI
 
-// ui shizz
+// empty & push to ui
 
 - (IBAction)refreshButton:(id)sender { // clear all results
     overSixLetters=0;
@@ -807,9 +782,9 @@ NSString *truthRead = nil;
     honesty=0;
     lackConfidence=0;
     confidence=0;
-    truthRead = @"Average";
-    powerRead = @"Average";
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"Scores: \n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@", happy, sad, angry, powerRead, truthRead];
+    truthRead = @"average";
+    powerRead = @"average";
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"%f \n%f \n%f \n%@ \n%@", sad, happy, angry, powerRead, truthRead];
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]; // access global variables
     appDelegate.globalWordCount = totalWords;
     appDelegate.globalHappy = happy;
@@ -818,8 +793,5 @@ NSString *truthRead = nil;
     appDelegate.globalPower = power;
     appDelegate.globalTruth = truth;
 }
-
-#pragma mark -
-#pragma mark Example for reading out Pocketsphinx and Flite audio levels without locking the UI by using an NSTimer
 
 @end
