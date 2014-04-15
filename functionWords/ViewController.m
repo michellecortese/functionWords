@@ -22,6 +22,9 @@
 @synthesize statusTextView;
 @synthesize heardTextView;
 @synthesize outputDisplayBox;
+@synthesize honestyDisplay;
+@synthesize confidenceDisplay;
+@synthesize wordCount;
 @synthesize pocketsphinxDbLabel;
 @synthesize fliteDbLabel;
 @synthesize openEarsEventsObserver;
@@ -542,13 +545,12 @@ NSString *truthRead = nil;
             }
         }
         NSArray *words = [hypothesis componentsSeparatedByString: @" "];
-         for (NSString * word in words ){
+        for (NSString * word in words ){
             if( [word length] > 6 ) {
                 overSixLetters++;
             }
         }
     }
-
     
     // tallies
     totalFirstPerson = firstPersonSingular + firstPersonPlural;
@@ -609,7 +611,7 @@ NSString *truthRead = nil;
     } else if (angry > 0) { angry = angry-0.005;}
     // confidence
     if (firstPersonPluralPercent > 2){confidence++;}
-    if (overSixLettersPercent > 25){confidence++;}
+    if (overSixLettersPercent > 20){confidence++;}
     if (articlesPercent > 11){confidence++;}
     // lack of confidence
     if (firstPersonSingularPercent > 16){lackConfidence++;}
@@ -619,14 +621,15 @@ NSString *truthRead = nil;
     if (confidence > lackConfidence){
         power = true;
         powerRead = @"high";
-    } else if (honesty < disHonesty) {
-        truth = false;
+    } else if (confidence < lackConfidence) {
+        power = false;
         powerRead = @"low";
     } else {
+        power = true;
         powerRead = @"average";
     }
     // honesty
-    if (overSixLettersPercent > 25){honesty++;}
+    if (overSixLettersPercent > 20){honesty++;}
     if (totalFirstPersonPercent > 17){honesty++;}
     if (semanticTimePercent > 9){honesty++;}
     // dishonesty
@@ -658,9 +661,19 @@ NSString *truthRead = nil;
     NSLog(@"\n Words Over Six Characters = %f percent \n First Person Singular Pronouns = %f percent \n First Person Plural Pronouns = %f percent \n Total First Person Pronouns = %f percent \n Second Person Pronouns = %f percent \n Third Person Pronouns = %f percent \n Articles = %f percent \n Causation Words = %f percent \n Past Tense Verbs = %f percent \n Future Tense Verbs = %f percent \n Time Words = %f percent \n Sample Size = %f words", overSixLettersPercent, firstPersonSingularPercent, firstPersonPluralPercent, totalFirstPersonPercent, secondPersonPercent, thirdPersonPercent, articlesPercent, semanticCausationPercent, pastTenseVerbsPercent, futureTenseVerbsPercent, semanticTimePercent, totalWords);
     NSLog(@"\n Happiness Score = %f /1 \n Sadness Score = %f /1 \n Anger Score = %f /1 \n Power = %@ \n Truth = %@ ", happy, sad, angry, powerRead, truthRead);
     
+    // translate color score alpha values to single digit ints
+    int sadWhole = (int)roundf(sad*10);
+    int happyWhole = (int)roundf(happy*10);
+    int angryWhole = (int)roundf(angry*10);
+    int countWhole = (int)roundf(totalWords);
+    
     // display words and scores in app
 	self.heardTextView.text = [NSString stringWithFormat:@"heard: \"%@\"", hypothesis]; // words
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"%f \n%f \n%f \n%@ \n%@", sad, happy, angry, powerRead, truthRead]; // score
+    
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"%d \n%d \n%d", sadWhole, happyWhole, angryWhole];
+    self.honestyDisplay.text = [NSString stringWithFormat:@"%@",truthRead];
+    self.confidenceDisplay.text = [NSString stringWithFormat:@"%@",powerRead];
+    self.wordCount.text = [NSString stringWithFormat:@"%d",countWhole];
 }
 
 
@@ -784,7 +797,8 @@ NSString *truthRead = nil;
     confidence=0;
     truthRead = @"average";
     powerRead = @"average";
-    self.outputDisplayBox.text = [NSString stringWithFormat:@"%f \n%f \n%f \n%@ \n%@", sad, happy, angry, powerRead, truthRead];
+    
+    
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]; // access global variables
     appDelegate.globalWordCount = totalWords;
     appDelegate.globalHappy = happy;
@@ -792,6 +806,18 @@ NSString *truthRead = nil;
     appDelegate.globalAngry = angry;
     appDelegate.globalPower = power;
     appDelegate.globalTruth = truth;
+    
+    // convert to whole numbers for display
+    int sadWhole = (int)roundf(sad*10);
+    int happyWhole = (int)roundf(happy*10);
+    int angryWhole = (int)roundf(angry*10);
+    int countWhole = (int)roundf(totalWords);
+    
+    // display words and scores in app
+    self.outputDisplayBox.text = [NSString stringWithFormat:@"%d \n%d \n%d", sadWhole, happyWhole, angryWhole];
+    self.honestyDisplay.text = [NSString stringWithFormat:@"%@",truthRead];
+    self.confidenceDisplay.text = [NSString stringWithFormat:@"%@",powerRead];
+    self.wordCount.text = [NSString stringWithFormat:@"%d",countWhole];
 }
 
 @end

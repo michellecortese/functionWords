@@ -26,8 +26,12 @@
 	IBOutlet UILabel *pocketsphinxDbLabel;
 	IBOutlet UILabel *fliteDbLabel;
     IBOutlet UILabel *outputDisplayBox;
+    IBOutlet UILabel *honestyDisplay;
+    IBOutlet UILabel *wordCount;
+    IBOutlet UILabel *confidenceDisplay;
     CrystalViewController *_crystalViewController;
 }
+
 
 // actions
 - (IBAction)refreshButton:(id)sender;
@@ -42,6 +46,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *pocketsphinxDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *fliteDbLabel;
 @property (nonatomic, strong) IBOutlet UILabel *outputDisplayBox;
+@property (nonatomic, strong) IBOutlet UILabel *honestyDisplay;
+@property (strong, nonatomic) IBOutlet UILabel *confidenceDisplay;
+@property (nonatomic, strong) IBOutlet UILabel *wordCount;
 @property (nonatomic, strong) CrystalViewController *crystalViewController;
 
 @end

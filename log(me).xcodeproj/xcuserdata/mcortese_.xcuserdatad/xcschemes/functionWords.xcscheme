@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7E9416C4189894F900244CCE"
-               BuildableName = "functionWords.app"
+               BuildableName = "log(me).app"
                BlueprintName = "log(me)"
                ReferencedContainer = "container:log(me).xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7E9416E5189894F900244CCE"
-               BuildableName = "functionWordsTests.xctest"
+               BuildableName = "log(me)Tests.xctest"
                BlueprintName = "log(me)Tests"
                ReferencedContainer = "container:log(me).xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7E9416C4189894F900244CCE"
-            BuildableName = "functionWords.app"
+            BuildableName = "log(me).app"
             BlueprintName = "log(me)"
             ReferencedContainer = "container:log(me).xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7E9416C4189894F900244CCE"
-            BuildableName = "functionWords.app"
+            BuildableName = "log(me).app"
             BlueprintName = "log(me)"
             ReferencedContainer = "container:log(me).xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7E9416C4189894F900244CCE"
-            BuildableName = "functionWords.app"
+            BuildableName = "log(me).app"
             BlueprintName = "log(me)"
             ReferencedContainer = "container:log(me).xcodeproj">
          </BuildableReference>
