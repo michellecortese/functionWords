@@ -668,7 +668,7 @@ NSString *truthRead = nil;
     int countWhole = (int)roundf(totalWords);
     
     // display words and scores in app
-	self.heardTextView.text = [NSString stringWithFormat:@"heard: \"%@\"", hypothesis]; // words
+	//self.heardTextView.text = [NSString stringWithFormat:@"heard: \"%@\"", hypothesis]; // words
     
     self.outputDisplayBox.text = [NSString stringWithFormat:@"%d \n%d \n%d", sadWhole, happyWhole, angryWhole];
     self.honestyDisplay.text = [NSString stringWithFormat:@"%@",truthRead];

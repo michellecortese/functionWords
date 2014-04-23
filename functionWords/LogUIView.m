@@ -66,11 +66,11 @@
     CGContextSetLineWidth(context, 0.75);
     CGContextSetAlpha(context, 1.0);
     CGContextSetStrokeColorWithColor(context,[UIColor blackColor].CGColor);
-    CGContextMoveToPoint(context, 235, 400);
-    CGContextAddLineToPoint(context, 235, 442);
-    CGContextMoveToPoint(context, 205, 438);
-    CGContextAddLineToPoint(context, 235, 400);
-    CGContextAddLineToPoint(context, 265, 438);
+    CGContextMoveToPoint(context, 235, 404);
+    CGContextAddLineToPoint(context, 235, 446);
+    CGContextMoveToPoint(context, 205, 442);
+    CGContextAddLineToPoint(context, 235, 404);
+    CGContextAddLineToPoint(context, 265, 442);
     CGContextStrokePath(context);
 }
 
@@ -79,25 +79,25 @@
     CGContextSetLineWidth(context, 0.75);
     CGContextSetAlpha(context, 1.0);
     CGContextSetStrokeColorWithColor(context,[UIColor blackColor].CGColor);
-    CGContextMoveToPoint(context, 235, 400);
-    CGContextAddLineToPoint(context, 235, 442);
-    CGContextMoveToPoint(context, 210, 404);
-    CGContextAddLineToPoint(context, 235, 442);
-    CGContextAddLineToPoint(context, 260, 404);
+    CGContextMoveToPoint(context, 235, 404);
+    CGContextAddLineToPoint(context, 235, 446);
+    CGContextMoveToPoint(context, 210, 408);
+    CGContextAddLineToPoint(context, 235, 446);
+    CGContextAddLineToPoint(context, 260, 408);
     CGContextStrokePath(context);
 }
 
 - (void)colorCircles:(CGContextRef)context colSad:(UIColor*)sadColor colHap:(UIColor*)happyColor colAng:(UIColor*)angryColor {
     CGContextSetFillColorWithColor(context,sadColor.CGColor);
-    CGRect sad = CGRectMake(147,263,10,10);
+    CGRect sad = CGRectMake(147,268,10,10);
     CGContextAddEllipseInRect(context, sad);
     CGContextFillPath(context);
     CGContextSetFillColorWithColor(context,happyColor.CGColor);
-    CGRect hap = CGRectMake(147,285,10,10);
+    CGRect hap = CGRectMake(147,290,10,10);
     CGContextAddEllipseInRect(context, hap);
     CGContextFillPath(context);
     CGContextSetFillColorWithColor(context,angryColor.CGColor);
-    CGRect ang = CGRectMake(147,306,10,10);
+    CGRect ang = CGRectMake(147,311,10,10);
     CGContextAddEllipseInRect(context, ang);
     CGContextFillPath(context);
 }
@@ -105,7 +105,7 @@
 -(void)honestyCircle: (CGContextRef)context {
     CGContextSetAlpha(context, 1.0);
     CGContextSetFillColorWithColor(context,[UIColor blackColor].CGColor);
-    CGRect rectangle = CGRectMake(198,250,82,82);
+    CGRect rectangle = CGRectMake(197,254,82,82);
     CGContextAddEllipseInRect(context, rectangle);
     CGContextFillPath(context);
 }
@@ -114,7 +114,7 @@
     CGContextSetAlpha(context, 1.0);
     CGContextSetLineWidth(context, 0.75);
     CGContextSetStrokeColorWithColor(context,[UIColor blackColor].CGColor);
-    CGRect rectangle = CGRectMake(198,250,82,82);
+    CGRect rectangle = CGRectMake(197,254,82,82);
     CGContextAddEllipseInRect(context, rectangle);
     CGContextStrokePath(context);
 }
@@ -137,8 +137,8 @@
     CGColorSpaceRef colorspace;
     CGFloat locations[2] = { 0.2, 0.9 };
     
-    UIColor *whiteGrad = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
-    UIColor *blackGrad = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.1];
+    UIColor *whiteGrad = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.15];
+    UIColor *blackGrad = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.15];
     NSArray *gradColors =    @[(id) whiteGrad.CGColor, (id) blackGrad.CGColor ];
     colorspace = CGColorSpaceCreateDeviceRGB();
     gradient = CGGradientCreateWithColors(colorspace,(CFArrayRef)gradColors, locations);
